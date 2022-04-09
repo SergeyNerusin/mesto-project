@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Место Россия</title>
+    <link
+      rel="shortcut icon"
+      href="./images/favicon/Earth-icon.ico"
+      type="image/x-icon"
+    />
+    <link rel="stylesheet" href="./pages/index.css" />
+  </head>
+  <body class="page">
+    <header class="header">
+      <img
+        class="header__logo"
+        src="./images/logo.svg"
+        alt="Логотип: Место Russia"
+      />
+    </header>
+    <main>
+      <section class="profile">
+        <img
+          src="./images/Jacq_Cousteau.jpg"
+          alt="Фото: Жак-Ив Кусто"
+          class="profile__avatar"
+        />
+        <div class="profile__info">
+          <h1 class="profile__name">Жак-Ив Кусто</h1>
+          <button class="profile__edit"></button>
+          <p class="profile__profession">Исследователь океана</p>
+        </div>
+        <button class="profile__button"></button>
+      </section>
+      <section class="elements" aria-label="Фотографии по теме - места России.">
+        <ul class="cards">
+          <li class="cards__item">
+            <img
+              src="./images/Karachaevsk.png"
+              alt="Изображение: Сентинский храм (18 км от города Карачаевск)"
+              class="cards__image"
+            />
+            <h3 class="cards__title">Карачаевск</h3>
+            <button class="cards__like"></button>
+          </li>
+          <li class="cards__item">
+            <img
+              src="./images/Mountain_Elbrus.png"
+              alt="Изображение: Гора Эльбрус"
+              class="cards__image"
+            />
+            <h3 class="cards__title">Гора Эльбрус</h3>
+            <button class="cards__like"></button>
+          </li>
+          <li class="cards__item">
+            <img
+              src="./images/Dombai.png"
+              alt="Изображение: Домбай - главный Кавказский хребет"
+              class="cards__image"
+            />
+            <h3 class="cards__title">Домбай</h3>
+            <button class="cards__like"></button>
+          </li>
+          <li class="cards__item">
+            <img
+              src="./images/karakolskie-ozera.jpg"
+              alt="Изображение: Алтай - Каракольские озера"
+              class="cards__image"
+            />
+            <h3 class="cards__title">Каракольские озера</h3>
+            <button class="cards__like"></button>
+          </li>
+          <li class="cards__item">
+            <img
+              src="./images/ostrov-patmos-hram.jpg"
+              alt="Изображение: Алтай - Храм Иоанна Богослова на острове Патмос"
+              class="cards__image"
+            />
+            <h3 class="cards__title">Остров Патмос</h3>
+            <button class="cards__like"></button>
+          </li>
+          <li class="cards__item">
+            <img
+              src="./images/stone-mushrooms.jpg"
+              alt="Изображение: Алтай - Каменные грибы: урочище Аккурум"
+              class="cards__image"
+            />
+            <h3 class="cards__title">Урочище Аккурум</h3>
+            <button class="cards__like cards__like_active"></button>
+          </li>
+        </ul>
+      </section>
+    </main>
+    <!-- Подвал сайта -->
+    <footer class="footer">
+      <p class="footer__copyright">&copy;&nbsp;2020.&nbsp;Mesto Russia</p>
+    </footer>
+    <!-- Чтобы открыть меню нужно добавить к классу popup модификатор popup_opened -->
+    <div class="popup">
+      <form action="#" class="popup__container">
+        <button class="popup__close"></button>
+        <h2 class="popup__heading">Редактировать профиль</h2>
+        <input
+          class="popup__item popup__item_el_name"
+          name="profile-name"
+          type="text"
+          id="profile-name"
+          placeholder="Имя Фамилия"
+          value="Жак-Ив Кусто"
+          required
+        />
+        <input
+          class="popup__item popup__item_el_profession"
+          name="profile-profession"
+          type="text"
+          id="profile-profession"
+          placeholder="Профессия"
+          value="Исследователь океана"
+          required
+        />
+        <input class="popup__button" type="submit" value="Сохранить" />
+      </form>
+    </div>
+  </body>
+</html>

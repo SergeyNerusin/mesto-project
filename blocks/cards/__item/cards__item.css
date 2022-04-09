@@ -1,0 +1,12 @@
+.cards__item {
+  display: block;
+  box-sizing: border-box;
+  width: 282px;
+  height: 363px;
+  border-radius: 10px;
+  background-color: #FFFFFF;
+  overflow: hidden;
+  position: relative;
+  padding: 0;
+  margin: 0;
+}
