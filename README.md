@@ -24,14 +24,14 @@ vendor - содержит стороннний файл normalize.css для к�
 
 ##### Для отображения модального окна
 ```html
-<footer class="footer">
+... <footer class="footer">
       <p class="footer__copyright">&copy;&nbsp;2020.&nbsp;Mesto Russia</p>
     </footer>
     <!-- Чтобы открыть модальное окно, необходимо в файле index.html добавить к классу popup модификатор popup_opened -->
     <div class="popup popup_opened">
       <form action="#" class="popup__container">
         <button class="popup__close"></button>
-        <h2 class="popup__heading">Редактировать профиль</h2>
+        <h2 class="popup__heading">Редактировать профиль</h2> ...
 ```
 
 __Функциональны возможности:__
