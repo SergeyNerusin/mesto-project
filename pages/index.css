@@ -9,6 +9,7 @@
 /* Профайл */
 @import url('../blocks/profile/profile.css');
 @import url('../blocks/profile/__avatar/profile__avatar.css');
+@import url('../blocks/profile/__line/profile__line.css');
 @import url('../blocks/profile/__info/profile__info.css');
 @import url('../blocks/profile/__name/profile__name.css');
 @import url('../blocks/profile/__edit/profile__edit.css');
@@ -20,6 +21,7 @@
 @import url('../blocks/cards/cards.css');
 @import url('../blocks/cards/__item/cards__item.css');
 @import url('../blocks/cards/__image/cards__image.css');
+@import url('../blocks/cards/__description/cards__description.css');
 @import url('../blocks/cards/__title/cards__title.css');
 @import url('../blocks/cards/__like/cards__like.css');
 @import url('../blocks/cards/__like/_active/cards__like_active.css');
@@ -31,12 +33,11 @@
 
 /* Меню */
 @import url('../blocks/popup/popup.css');
-@import url('../blocks/popup/__container/popup__container.css');
 @import url('../blocks/popup/_opened/popup_opened.css');
 @import url('../blocks/popup/__container/popup__container.css');
-@import url('../blocks/popup/__heading/popup__heading.css');
-@import url('../blocks/popup/__item/popup__item.css');
-@import url('../blocks/popup/__item/_el_name/popup__item_el_name.css');
-@import url('../blocks/popup/__item/_el_profession/popup__item_el_profession.css');
-@import url('../blocks/popup/__button/popup__button.css');
 @import url('../blocks/popup/__close/popup__close.css');
+@import url('../blocks/form/form.css');
+@import url('../blocks/form/__heading/form__heading.css');
+@import url('../blocks/form/__name/form__name.css');
+@import url('../blocks/form/__profession/form__profession.css');
+@import url('../blocks/form/__button/form__button.css');

@@ -12,11 +12,7 @@
 @media screen and (max-width: 964px) {
   .profile {
     padding: 40px 5.937% 36px;
-    display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
     flex-wrap: nowrap;
   }
-
 }

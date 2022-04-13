@@ -24,15 +24,17 @@
       <section class="profile">
         <img
           src="./images/Jacq_Cousteau.jpg"
-          alt="Фото: Жак-Ив Кусто"
+          alt="Фото: Аватар пользователя"
           class="profile__avatar"
         />
         <div class="profile__info">
-          <h1 class="profile__name">Жак-Ив Кусто</h1>
-          <button class="profile__edit"></button>
+          <div class="profile__line">
+            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <button type="submit" class="profile__edit"></button>
+          </div>
           <p class="profile__profession">Исследователь океана</p>
         </div>
-        <button class="profile__button"></button>
+        <button type="button" class="profile__button"></button>
       </section>
       <section class="elements" aria-label="Фотографии по теме - места России.">
         <ul class="cards">
@@ -42,8 +44,10 @@
               alt="Изображение: Сентинский храм (18 км от города Карачаевск)"
               class="cards__image"
             />
-            <h3 class="cards__title">Карачаевск</h3>
-            <button class="cards__like"></button>
+            <div class="cards__description">
+              <h3 class="cards__title">Карачаевск</h3>
+              <button type="button" class="cards__like"></button>
+            </div>
           </li>
           <li class="cards__item">
             <img
@@ -51,8 +55,10 @@
               alt="Изображение: Гора Эльбрус"
               class="cards__image"
             />
-            <h3 class="cards__title">Гора Эльбрус</h3>
-            <button class="cards__like"></button>
+            <div class="cards__description">
+              <h3 class="cards__title">Гора Эльбрус</h3>
+              <button type="button" class="cards__like"></button>
+            </div>
           </li>
           <li class="cards__item">
             <img
@@ -60,8 +66,10 @@
               alt="Изображение: Домбай - главный Кавказский хребет"
               class="cards__image"
             />
-            <h3 class="cards__title">Домбай</h3>
-            <button class="cards__like"></button>
+            <div class="cards__description">
+              <h3 class="cards__title">Домбай</h3>
+              <button type="button" class="cards__like"></button>
+            </div>
           </li>
           <li class="cards__item">
             <img
@@ -69,8 +77,10 @@
               alt="Изображение: Алтай - Каракольские озера"
               class="cards__image"
             />
-            <h3 class="cards__title">Каракольские озера</h3>
-            <button class="cards__like"></button>
+            <div class="cards__description">
+              <h3 class="cards__title">Каракольские озера</h3>
+              <button type="button" class="cards__like"></button>
+            </div>
           </li>
           <li class="cards__item">
             <img
@@ -78,8 +88,10 @@
               alt="Изображение: Алтай - Храм Иоанна Богослова на острове Патмос"
               class="cards__image"
             />
-            <h3 class="cards__title">Остров Патмос</h3>
-            <button class="cards__like"></button>
+            <div class="cards__description">
+              <h3 class="cards__title">Остров Патмос</h3>
+              <button type="button" class="cards__like"></button>
+            </div>
           </li>
           <li class="cards__item">
             <img
@@ -87,8 +99,13 @@
               alt="Изображение: Алтай - Каменные грибы: урочище Аккурум"
               class="cards__image"
             />
-            <h3 class="cards__title">Урочище Аккурум</h3>
-            <button class="cards__like cards__like_active"></button>
+            <div class="cards__description">
+              <h3 class="cards__title">Урочище Аккурум</h3>
+              <button
+                type="button"
+                class="cards__like cards__like_active"
+              ></button>
+            </div>
           </li>
         </ul>
       </section>
@@ -99,29 +116,31 @@
     </footer>
     <!-- Чтобы открыть модальное окно, необходимо добавить к классу popup модификатор popup_opened -->
     <div class="popup">
-      <form action="#" class="popup__container">
-        <button class="popup__close"></button>
-        <h2 class="popup__heading">Редактировать профиль</h2>
-        <input
-          class="popup__item popup__item_el_name"
-          name="profile-name"
-          type="text"
-          id="profile-name"
-          placeholder="Имя Фамилия"
-          value="Жак-Ив Кусто"
-          required
-        />
-        <input
-          class="popup__item popup__item_el_profession"
-          name="profile-profession"
-          type="text"
-          id="profile-profession"
-          placeholder="Профессия"
-          value="Исследователь океана"
-          required
-        />
-        <input class="popup__button" type="submit" value="Сохранить" />
-      </form>
+      <div class="popup__container">
+        <button type="button" class="popup__close"></button>
+        <form action="#" name="profile" class="form">
+          <h2 class="form__heading">Редактировать профиль</h2>
+          <input
+            class="form__name"
+            name="profile-name"
+            type="text"
+            id="profile-name"
+            placeholder="Имя Фамилия"
+            value="Жак-Ив Кусто"
+            required
+          />
+          <input
+            class="form__profession"
+            name="profile-profession"
+            type="text"
+            id="profile-profession"
+            placeholder="Профессия"
+            value="Исследователь океана"
+            required
+          />
+          <input class="form__button" type="submit" value="Сохранить" />
+        </form>
+      </div>
     </div>
   </body>
 </html>

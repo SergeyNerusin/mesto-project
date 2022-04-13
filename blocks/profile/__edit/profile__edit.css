@@ -1,10 +1,9 @@
 .profile__edit {
-  display: inline-block;
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
   background-color: #000;
   background-image: url('../../../images/pencil.svg');
-  background-position: 50% 50%;
+  background-position: center;
   background-repeat: no-repeat;
   border: 1px solid #fff;
   cursor: pointer;
@@ -14,11 +13,12 @@
 
 .profile__edit:hover {
   transition: opacity .5s linear;
-  opacity: 0.8;
+  opacity: 0.6;
 }
 
 @media screen and (max-width: 964px) {
   .profile__edit {
-    vertical-align: sub;
+    width: 16px;
+    height: 16px;
   }
 }
