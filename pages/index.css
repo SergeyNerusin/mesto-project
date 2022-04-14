@@ -38,6 +38,9 @@
 @import url('../blocks/popup/__close/popup__close.css');
 @import url('../blocks/form/form.css');
 @import url('../blocks/form/__heading/form__heading.css');
-@import url('../blocks/form/__name/form__name.css');
-@import url('../blocks/form/__profession/form__profession.css');
+@import url('../blocks/form/__item/form__item.css');
+@import url('../blocks/form/__item/_margin/form__item_margin_name.css');
+@import url('../blocks/form/__item/_margin/form__item_margin_profession.css');
+@import url('../blocks/form/__item/_el/form__item_el_name.css');
+@import url('../blocks/form/__item/_el/form__item_el_profession.css');
 @import url('../blocks/form/__button/form__button.css');

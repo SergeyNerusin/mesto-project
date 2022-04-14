@@ -5,12 +5,13 @@
   justify-content: space-between;
   align-items: center;
   padding: 0;
-  margin: 0 0 16px 0;
+  margin: 0 0 10px 0;
 }
 
 @media screen and (max-width: 964px) {
   .profile__line {
-    margin: 0 0 14px 0;
+    max-width: 217px;
+    margin: 0 0 8px 32px;
   }
 
 }

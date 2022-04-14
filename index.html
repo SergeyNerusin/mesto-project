@@ -30,11 +30,19 @@
         <div class="profile__info">
           <div class="profile__line">
             <h1 class="profile__name">Жак-Ив Кусто</h1>
-            <button type="submit" class="profile__edit"></button>
+            <button
+              title="Редактирование профиля"
+              type="button"
+              class="profile__edit"
+            ></button>
           </div>
           <p class="profile__profession">Исследователь океана</p>
         </div>
-        <button type="button" class="profile__button"></button>
+        <button
+          title="Добавить фото-материал"
+          type="button"
+          class="profile__button"
+        ></button>
       </section>
       <section class="elements" aria-label="Фотографии по теме - места России.">
         <ul class="cards">
@@ -46,7 +54,11 @@
             />
             <div class="cards__description">
               <h3 class="cards__title">Карачаевск</h3>
-              <button type="button" class="cards__like"></button>
+              <button
+                title="Поставить отметку - нравится"
+                type="button"
+                class="cards__like"
+              ></button>
             </div>
           </li>
           <li class="cards__item">
@@ -57,7 +69,11 @@
             />
             <div class="cards__description">
               <h3 class="cards__title">Гора Эльбрус</h3>
-              <button type="button" class="cards__like"></button>
+              <button
+                title="Поставить отметку - нравится"
+                type="button"
+                class="cards__like"
+              ></button>
             </div>
           </li>
           <li class="cards__item">
@@ -68,7 +84,11 @@
             />
             <div class="cards__description">
               <h3 class="cards__title">Домбай</h3>
-              <button type="button" class="cards__like"></button>
+              <button
+                title="Поставить отметку - нравится"
+                type="button"
+                class="cards__like"
+              ></button>
             </div>
           </li>
           <li class="cards__item">
@@ -79,7 +99,11 @@
             />
             <div class="cards__description">
               <h3 class="cards__title">Каракольские озера</h3>
-              <button type="button" class="cards__like"></button>
+              <button
+                title="Поставить отметку - нравится"
+                type="button"
+                class="cards__like"
+              ></button>
             </div>
           </li>
           <li class="cards__item">
@@ -90,7 +114,11 @@
             />
             <div class="cards__description">
               <h3 class="cards__title">Остров Патмос</h3>
-              <button type="button" class="cards__like"></button>
+              <button
+                title="Поставить отметку - нравится"
+                type="button"
+                class="cards__like"
+              ></button>
             </div>
           </li>
           <li class="cards__item">
@@ -102,6 +130,7 @@
             <div class="cards__description">
               <h3 class="cards__title">Урочище Аккурум</h3>
               <button
+                title="Поставить отметку - нравится"
                 type="button"
                 class="cards__like cards__like_active"
               ></button>
@@ -117,11 +146,15 @@
     <!-- Чтобы открыть модальное окно, необходимо добавить к классу popup модификатор popup_opened -->
     <div class="popup">
       <div class="popup__container">
-        <button type="button" class="popup__close"></button>
+        <button
+          title="Закрыть без сохранения данных"
+          type="button"
+          class="popup__close"
+        ></button>
         <form action="#" name="profile" class="form">
           <h2 class="form__heading">Редактировать профиль</h2>
           <input
-            class="form__name"
+            class="form__item form__item_margin_name form__item_el_name"
             name="profile-name"
             type="text"
             id="profile-name"
@@ -130,7 +163,7 @@
             required
           />
           <input
-            class="form__profession"
+            class="form__item form__item_margin_profession form__item_el_profession"
             name="profile-profession"
             type="text"
             id="profile-profession"
