@@ -1,15 +1,5 @@
 .popup_opened {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 195px 1fr 1fr;
-  justify-items: center;
-  align-items: start;
-  padding: 0;
-  margin: 0;
-}
-
-@media screen and (max-width: 768px) {
-  .popup_opened {
-    grid-template-rows: 123px 1fr 1fr;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
