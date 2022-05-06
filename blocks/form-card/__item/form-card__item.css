@@ -1,4 +1,4 @@
-.form__item {
+.form-card__item {
   width: 100%;
   height: 27px;
   font-family: inherit;
@@ -16,20 +16,20 @@
   margin: 0;
 }
 
-.form__item:nth-child(2) {
+.form-card__item:nth-child(2) {
   margin: 0 0 30px 0;
 }
 
-.form__item:nth-child(3) {
+.form-card__item:nth-child(3) {
   margin: 0 0 48px 0;
 }
 
-.form__item:focus {
+.form-card__item:focus {
   outline-color: #eed2bb;
 }
 
 @media screen and (max-width: 768px) {
-  .form__item:nth-child(3) {
+  .form-card__item:nth-child(3) {
     margin-bottom: 45px;
   }
 }

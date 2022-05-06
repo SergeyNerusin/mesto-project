@@ -1,4 +1,4 @@
-.form__button {
+.form-card__button {
   width: 358px;
   height: 50px;
   border: 0;
@@ -14,13 +14,13 @@
   margin: 0;
 }
 
-.form__button:hover {
+.form-card__button:hover {
   transition: opacity .5s linear;
   opacity: 0.8;
 }
 
 @media screen and (max-width: 768px) {
-  .form__button {
+  .form-card__button {
     width: 238px;
     height: 46px;
     font-size: 14px;

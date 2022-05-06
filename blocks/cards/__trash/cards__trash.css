@@ -1,0 +1,14 @@
+.cards__trash {
+  width: 18px;
+  height: 19px;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.cards__trash:hover {
+  opacity: 0.6;
+  transition: opacity 0.5s linear;
+}
