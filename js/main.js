@@ -208,8 +208,6 @@ buttonAddFoto.addEventListener('click', function() {
 popupCloseModal.forEach(function(closeModal) {
   const buttonClose = closeModal.closest('.popup');
   closeModal.addEventListener('click', () => {
-    nameCardInput.value="";
-    linkCardInput.value="";
     togglePopup(buttonClose);});
 });
 
