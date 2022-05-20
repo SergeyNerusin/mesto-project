@@ -28,18 +28,18 @@ const initialCards = [
   }
 ];
 
-/*  Редактирование профиля  */
+/*  Редактирование профиля, определяем:  */
 
-// кнопка редактирования профиля
+// селектор кнопки редактирования профиля
 const buttonProfileEdit = document.querySelector('.profile__edit');
-// класс - окно редактирования профиля
+// селектор модального окна редактирования профиля
 const popupModalProfile = document.querySelector('.popup__profile');
-// класс формы редактирования профиля
+// селектор формы редактирования профиля
 const formEditProfile = document.querySelector('.form-profile');
 
-/* Определяем селекторы для работы с кнопками, с модалными окнами */
+/* Для работы с кнопками и модалными окнами определяем: */
 
-// селектор кнопки:  открытие формы добавления фотоматериала
+// селектор кнопки:  открытие формы добавления карточки
 const buttonAddFoto = document.querySelector('.profile__button');
 // селектор  модального окна: добавление фото-материала
 const popupModalCard = document.querySelector('.popup__card');
@@ -53,7 +53,7 @@ const popupCloseModal = document.querySelectorAll('.popup__close');
 
 // определяем селектор куда будем вставлять разметку
 const elementCard = document.querySelector('.cards');
-// определяем селектор откуда берём HTML разметку
+// определяем селектор template тега, откуда берём HTML разметку
 const template = document.querySelector('#oneCard').content;
 
 
@@ -87,7 +87,7 @@ function submitProfileform (evt) {
   togglePopup(popupModalProfile);
 }
 
-/* 2.Функция ввода данных из формы для добавления карточки */
+/* 2. Функция ввода данных из формы для добавления карточки */
 function submitAddcard (evt) {
   evt.preventDefault();
   // передаем в функцию ссылку на изображение, название карточки
@@ -105,7 +105,7 @@ function togglePopup(popupWindow){
   popupWindow.classList.toggle('popup_opened');
 }
 
-/* 4.1. Функция формирования карточки с изображением, названием, лайком */
+/* 4.1. Функция формирования карточки с изображением, названием, лайком, корзинкой */
 function createCard(cardLink, cardName) {
   // создаём копию  карточки HTML разметки
   const oneCard = template.querySelector('.cards__item').cloneNode(true);
@@ -158,7 +158,6 @@ function deleteCardHandler(trashCard) {
     card.remove();});
 }
 
-
 /* 7. Функция открытия картинки из  отрисованной карточки */
 function openFotofromCard(linkImage, titleImage, altImage){
   // затемняем фон для просмотра фото
@@ -172,7 +171,7 @@ function openFotofromCard(linkImage, titleImage, altImage){
   togglePopup(imageModal);
 }
 
-/* 8. Функция установки прослушивателя нажатия на кртинку карточки */
+/* 8. Функция установки прослушивателя нажатия на картинку карточки */
 function viewImagesfoto(imageCard){
   imageCard.addEventListener('click', function(evt) {
     const card = evt.target.closest('.cards__item');
@@ -211,7 +210,7 @@ popupCloseModal.forEach(function(closeModal) {
     togglePopup(buttonClose);});
 });
 
-// выводим  карточки из объекта initialCards
+// выводим карточки из объекта initialCards
 initialCards.forEach(function(element){
   const oneCardElement = createCard(element.link, element.name);
   addCard(oneCardElement);
