@@ -60,27 +60,37 @@
           type="button"
           class="popup__close"
         ></button>
-        <form action="#" name="formEditProfile" class="form-profile">
-          <h2 class="form-profile__heading">Редактировать профиль</h2>
-          <input
-            class="form-profile__item form-profile__item_el_name"
-            name="profile-name"
-            type="text"
-            id="profile-name"
-            placeholder="Имя Фамилия"
-            value=""
-            required
-          />
-          <input
-            class="form-profile__item form-profile__item_el_profession"
-            name="profile-profession"
-            type="text"
-            id="profile-profession"
-            placeholder="Профессия"
-            value=""
-            required
-          />
-          <input class="form-profile__button" type="submit" value="Сохранить" />
+        <form action="#" name="formProfile" class="popup__form" novalidate>
+          <h2 class="popup__heading">Редактировать профиль</h2>
+          <label class="popup__field">
+            <input
+              class="popup__input"
+              name="name"
+              type="text"
+              id="name"
+              placeholder="Имя Фамилия"
+              value=""
+              minlength="2"
+              maxlength="40"
+              required
+            />
+            <span class="popup__input-error" id="name-error"></span>
+          </label>
+          <label class="popup__field">
+            <input
+              class="popup__input"
+              name="profession"
+              type="text"
+              id="profession"
+              placeholder="Профессия"
+              value=""
+              minlength="2"
+              maxlength="200"
+              required
+            />
+            <span class="popup__input-error" id="profession-error"></span>
+          </label>
+          <button class="popup__button" type="submit">Сохранить</button>
         </form>
       </div>
     </div>
@@ -91,27 +101,38 @@
           type="button"
           class="popup__close"
         ></button>
-        <form action="#" name="formAddCard" class="form-card">
-          <h2 class="form-card__heading">Новое место</h2>
-          <input
-            class="form-card__item form-card__item_el_name"
-            name="card-name"
-            type="text"
-            id="card-name"
-            placeholder="Название"
-            value=""
-            required
-          />
-          <input
-            class="form-card__item form-card__item_el_link"
-            name="card-link"
-            type="text"
-            id="card-link"
-            placeholder="Ссылка на картинку"
-            value=""
-            required
-          />
-          <input class="form-card__button" type="submit" value="Сохранить" />
+        <form action="#" name="formCard" class="popup__form" novalidate>
+          <h2 class="popup__heading">Новое место</h2>
+          <label class="popup__field">
+            <input
+              class="popup__input"
+              name="card"
+              type="text"
+              id="card"
+              placeholder="Название"
+              value=""
+              minlength="2"
+              maxlength="30"
+              required
+            />
+            <span class="popup__input-error" id="card-error"></span>
+          </label>
+          <label class="popup__field">
+            <input
+              class="popup__input"
+              name="link"
+              type="url"
+              id="url"
+              pattern="http(s)?://.+"
+              placeholder="Ссылка на картинку"
+              value=""
+              required
+            />
+            <span class="popup__input-error" id="url-error"></span>
+          </label>
+          <button class="popup__button" value="Сохранить" type="submit">
+            Сохранить
+          </button>
         </form>
       </div>
     </div>
@@ -138,6 +159,6 @@
         </div>
       </li>
     </template>
-    <script src="./js/main.js" defer></script>
+    <script type="module" src="./js/index.js" defer></script>
   </body>
 </html>
