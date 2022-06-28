@@ -104,13 +104,14 @@ function listenPage(evt){
           nameInput.value = profileName.textContent;
           jobInput.value = profileProfession.textContent;
           toggleButtonState(dataSelectorValid,[nameInput, jobInput],formEditProfile.querySelector('.popup__button'));
-          page.addEventListener('keyup', listenKeyboard);
           togglePopup(popupModalProfile);
+          page.addEventListener('keyup', listenKeyboard);
           break;
     case 'profile__button':
-          page.addEventListener('keyup', listenKeyboard);
           cleanValueAddCard();
+          toggleButtonState(dataSelectorValid,[nameCardInput, linkCardInput],formEditCard.querySelector('.popup__button'));
           togglePopup(popupModalCard);
+          page.addEventListener('keyup', listenKeyboard);
           break;
     case 'cards__image':
           page.addEventListener('keyup', listenKeyboard);
@@ -125,8 +126,8 @@ function listenPage(evt){
     case 'popup':
     case 'popup__close':
           page.removeEventListener('keyup', listenKeyboard);
-          deleteClassError();
           togglePopup(evt.target.closest('.popup'));
+          deleteClassError();
           break;
     default:
           console.log('Значение не определено');
