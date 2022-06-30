@@ -1,6 +1,7 @@
 /* jshint esversion:6 */
 
-import {openFotofromCard} from './modal.js';
+import {openFotofromCard} from './modal';
+import trash from '../images/trash.svg';
 
 const elementCard = document.querySelector('.cards');
 const template = document.querySelector('#oneCard').content;
@@ -15,7 +16,7 @@ function createCard(cardLink, cardName) {
   selectorImage.alt = `Изображение: ${cardName}`;
   selectorTrash.alt ='Изображение: Корзина';
   selectorTrash.title ='Удалить карточку';
-  selectorTrash.src = './images/trash.svg';
+  selectorTrash.src = trash;
   selectorLike.title = 'Поставить отметку: Нравится';
   selectorTitle.textContent = cardName;
   return oneCard;

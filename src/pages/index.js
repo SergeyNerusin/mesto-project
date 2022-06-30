@@ -1,11 +1,12 @@
 /* jshint esversion: 6 */
 
-import {cleanValueAddCard, togglePopup} from './utils.js';
-import {initialCards, dataSelectorValid} from './data.js';
-import {enableValidation, toggleButtonState} from './validate.js';
-import {createCard, addCard, putLikeHandler, deleteCardHandler, viewImagesfoto} from './cards.js';
-import {profileName, profileProfession, popupModalProfile, popupModalCard, formEditProfile, nameInput, jobInput, formEditCard, nameCardInput, linkCardInput, submitProfileform, submitAddcard, deleteClassError} from './modal.js';
+import {cleanValueAddCard, togglePopup} from '../components/utils.js';
+import {initialCards, dataSelectorValid} from '../components/data.js';
+import {enableValidation, toggleButtonState} from '../components/validate.js';
+import {createCard, addCard, putLikeHandler, deleteCardHandler, viewImagesfoto} from '../components/cards.js';
+import {profileName, profileProfession, popupModalProfile, popupModalCard, formEditProfile, nameInput, jobInput, formEditCard, nameCardInput, linkCardInput, submitProfileform, submitAddcard, deleteClassError} from '../components/modal.js';
 
+import './index.css';
 
 const page = document.querySelector('.page');
 
