@@ -1,6 +1,7 @@
 /* jshint esversion:6 */
 
 import {createCard, addCard} from './cards.js';
+import {cleanValueAddCard, togglePopup} from './utils.js';
 
 const imageModal = document.querySelector('.popup__card-image');
 
@@ -31,10 +32,6 @@ function submitAddcard (evt) {
   togglePopup(popupModalCard);
 }
 
-function cleanValueAddCard(){
-   formEditCard.reset();
-}
-
 function deleteClassError(){
   const spanError = Array.from(document.querySelectorAll('.popup__input'));
   const inputError = Array.from(document.querySelectorAll('.popup__input-error'));
@@ -52,8 +49,4 @@ function openFotofromCard(linkImage, titleImage, altImage){
   togglePopup(imageModal);
 }
 
-function togglePopup(popupWindow){
-  popupWindow.classList.toggle('popup_opened');
-}
-
-export {profileName, profileProfession, popupModalProfile, popupModalCard, formEditProfile, nameInput, jobInput, formEditCard, nameCardInput, linkCardInput, submitProfileform, submitAddcard, cleanValueAddCard, deleteClassError, openFotofromCard, togglePopup};
+export {profileName, profileProfession, popupModalProfile, popupModalCard, formEditProfile, nameInput, jobInput, formEditCard, nameCardInput, linkCardInput, submitProfileform, submitAddcard, cleanValueAddCard, deleteClassError, openFotofromCard};
