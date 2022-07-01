@@ -1,36 +1,7 @@
 /* jshint esversion:6 */
 
-import {createCard, addCard} from './cards.js';
-import {cleanValueAddCard, togglePopup} from './utils.js';
+import {listenKeyboard} from '../pages/index.js';
 
-const imageModal = document.querySelector('.popup__card-image');
-
-const profileName = document.querySelector('.profile__name');
-const profileProfession = document.querySelector('.profile__profession');
-const popupModalProfile = document.querySelector('.popup__profile');
-const popupModalCard = document.querySelector('.popup__card');
-
-const formEditProfile = document.forms.formProfile;
-const nameInput = formEditProfile.elements.name;
-const jobInput = formEditProfile.elements.profession;
-const formEditCard = document.forms.formCard;
-const nameCardInput = formEditCard.elements.card;
-const linkCardInput = formEditCard.elements.link;
-
-function submitProfileform (evt) {
-  evt.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileProfession.textContent = jobInput.value;
-  togglePopup(popupModalProfile);
-}
-
-function submitAddcard (evt) {
-  evt.preventDefault();
-  const oneCardElement = createCard(linkCardInput.value, nameCardInput.value);
-  addCard(oneCardElement);
-  cleanValueAddCard();
-  togglePopup(popupModalCard);
-}
 
 function deleteClassError(){
   const spanError = Array.from(document.querySelectorAll('.popup__input'));
@@ -41,12 +12,14 @@ function deleteClassError(){
            element.classList.remove('popup__input-error_active');});
 }
 
-function openFotofromCard(linkImage, titleImage, altImage){
-  imageModal.style = 'background-color: #000';
-  imageModal.querySelector('.popup__image').src = linkImage;
-  imageModal.querySelector('.popup__image').alt = altImage;
-  imageModal.querySelector('.popup__image-caption').textContent = titleImage;
-  togglePopup(imageModal);
+function openPopup(popupWindow){
+  popupWindow.classList.add('popup_opened');
+  document.addEventListener('keyup', listenKeyboard);
 }
 
-export {profileName, profileProfession, popupModalProfile, popupModalCard, formEditProfile, nameInput, jobInput, formEditCard, nameCardInput, linkCardInput, submitProfileform, submitAddcard, cleanValueAddCard, deleteClassError, openFotofromCard};
+function closePopup(popupWindow){
+  popupWindow.classList.remove('popup_opened');
+  document.removeEventListener('keyup', listenKeyboard);
+}
+
+export {deleteClassError, openPopup, closePopup};

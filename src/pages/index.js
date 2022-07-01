@@ -1,60 +1,71 @@
 /* jshint esversion: 6 */
 
-import {cleanValueAddCard, togglePopup} from '../components/utils.js';
-import {initialCards, dataSelectorValid} from '../components/data.js';
+import {cleanValueAddCard} from '../components/utils/utils.js';
+import {page, btnProfileEdit, btnAddCard, profileName, profileProfession, popupModalProfile, popupModalCard, formEditProfile, nameInput, jobInput, formEditCard, nameCardInput, linkCardInput, initialCards, dataSelectorValid, elementCard} from '../components/utils/constants.js';
 import {enableValidation, toggleButtonState} from '../components/validate.js';
-import {createCard, addCard, putLikeHandler, deleteCardHandler, viewImagesfoto} from '../components/cards.js';
-import {profileName, profileProfession, popupModalProfile, popupModalCard, formEditProfile, nameInput, jobInput, formEditCard, nameCardInput, linkCardInput, submitProfileform, submitAddcard, deleteClassError} from '../components/modal.js';
+import {createCard} from '../components/cards.js';
+import {deleteClassError, openPopup, closePopup} from '../components/modal.js';
 
 import './index.css';
 
-const page = document.querySelector('.page');
+function openProfileEdit(){
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileProfession.textContent;
+  toggleButtonState(dataSelectorValid,[nameInput, jobInput],formEditProfile.querySelector('.popup__button'));
+  openPopup(popupModalProfile);
+}
+
+function openAddCard(){
+  cleanValueAddCard();
+  toggleButtonState(dataSelectorValid,[nameCardInput, linkCardInput],formEditCard.querySelector('.popup__button'));
+  openPopup(popupModalCard);
+
+}
 
 function listenPage(evt){
   switch (evt.target.classList[0]) {
-    case 'profile__edit':
-          nameInput.value = profileName.textContent;
-          jobInput.value = profileProfession.textContent;
-          toggleButtonState(dataSelectorValid,[nameInput, jobInput],formEditProfile.querySelector('.popup__button'));
-          togglePopup(popupModalProfile);
-          page.addEventListener('keyup', listenKeyboard);
-          break;
-    case 'profile__button':
-          cleanValueAddCard();
-          toggleButtonState(dataSelectorValid,[nameCardInput, linkCardInput],formEditCard.querySelector('.popup__button'));
-          togglePopup(popupModalCard);
-          page.addEventListener('keyup', listenKeyboard);
-          break;
-    case 'cards__image':
-          page.addEventListener('keyup', listenKeyboard);
-          viewImagesfoto(evt.target);
-          break;
-    case 'cards__trash':
-          deleteCardHandler(evt.target);
-          break;
-    case 'cards__like':
-          putLikeHandler(evt.target);
-          break;
-    case 'popup':
-    case 'popup__close':
-          page.removeEventListener('keyup', listenKeyboard);
-          togglePopup(evt.target.closest('.popup'));
-          deleteClassError();
-          break;
-    default:
+      case 'popup':
+      case 'popup__close':
+             closePopup(evt.target.closest('.popup'));
+             deleteClassError();
+             break;
+     default:
           console.log('Значение не определено');
-          break;
+           break;
   }
 }
 
 function listenKeyboard(evt){
-  const window = Boolean(page.querySelector('.popup_opened'));
-  if((evt.key === 'Escape') && window){
+  const popupOpen = page.querySelector('.popup_opened');
+  if((evt.key === 'Escape') && popupOpen){
       cleanValueAddCard();
       deleteClassError();
-      togglePopup(page.querySelector('.popup_opened'));
+      closePopup(page.querySelector('.popup_opened'));
     }
 }
+
+function submitProfileform (evt) {
+  evt.preventDefault();
+  profileName.textContent = nameInput.value;
+  profileProfession.textContent = jobInput.value;
+  closePopup(popupModalProfile);
+}
+
+function submitAddcard (evt) {
+  evt.preventDefault();
+  const oneCardElement = createCard(linkCardInput.value, nameCardInput.value);
+  addCard(oneCardElement);
+  cleanValueAddCard();
+  closePopup(popupModalCard);
+}
+
+function addCard(oneCard){
+  elementCard.prepend(oneCard);
+}
+
+btnProfileEdit.addEventListener('click', openProfileEdit);
+btnAddCard.addEventListener('click', openAddCard);
+
 
 formEditProfile.addEventListener('submit', submitProfileform);
 formEditCard.addEventListener('submit', submitAddcard);
@@ -62,7 +73,7 @@ formEditCard.addEventListener('submit', submitAddcard);
 
 enableValidation(dataSelectorValid);
 
-page.addEventListener('click', listenPage);
+document.addEventListener('click', listenPage);
 
 initialCards.forEach(function(element){
   const oneCardElement = createCard(element.link, element.name);
@@ -70,6 +81,4 @@ initialCards.forEach(function(element){
 });
 
 
-
-
-
+export {listenKeyboard};
