@@ -2,7 +2,7 @@
 
 import {openPopup} from './modal.js';
 import trash from '../images/trash.svg';
-import {template, imageModal, picture, pictureName} from '../components/utils/constants.js';
+import {template, imageModal, picture, pictureName} from '../utils/constants.js';
 
 function createCard(cardLink, cardName) {
   const card = getTemplate();

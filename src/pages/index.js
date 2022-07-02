@@ -1,10 +1,10 @@
 /* jshint esversion: 6 */
 
-import {cleanValueAddCard} from '../components/utils/utils.js';
-import {page, btnProfileEdit, btnAddCard, profileName, profileProfession, popupModalProfile, popupModalCard, formEditProfile, nameInput, jobInput, formEditCard, nameCardInput, linkCardInput, initialCards, dataSelectorValid, elementCard} from '../components/utils/constants.js';
+import {cleanValueAddCard} from '../utils/utils.js';
+import {page, btnProfileEdit, btnAddCard, profileName, profileProfession, popupModalProfile, popupModalCard, formEditProfile, nameInput, jobInput, formEditCard, nameCardInput, linkCardInput, initialCards, dataSelectorValid, elementCard} from '../utils/constants.js';
 import {enableValidation, toggleButtonState} from '../components/validate.js';
 import {createCard} from '../components/cards.js';
-import {deleteClassError, openPopup, closePopup} from '../components/modal.js';
+import {deleteClassError, openPopup, closePopup, listenKeyboard} from '../components/modal.js';
 
 import './index.css';
 
@@ -20,28 +20,6 @@ function openAddCard(){
   toggleButtonState(dataSelectorValid,[nameCardInput, linkCardInput],formEditCard.querySelector('.popup__button'));
   openPopup(popupModalCard);
 
-}
-
-function listenPage(evt){
-  switch (evt.target.classList[0]) {
-      case 'popup':
-      case 'popup__close':
-             closePopup(evt.target.closest('.popup'));
-             deleteClassError();
-             break;
-     default:
-          console.log('Значение не определено');
-           break;
-  }
-}
-
-function listenKeyboard(evt){
-  const popupOpen = page.querySelector('.popup_opened');
-  if((evt.key === 'Escape') && popupOpen){
-      cleanValueAddCard();
-      deleteClassError();
-      closePopup(page.querySelector('.popup_opened'));
-    }
 }
 
 function submitProfileform (evt) {
@@ -72,8 +50,6 @@ formEditCard.addEventListener('submit', submitAddcard);
 
 
 enableValidation(dataSelectorValid);
-
-document.addEventListener('click', listenPage);
 
 initialCards.forEach(function(element){
   const oneCardElement = createCard(element.link, element.name);
