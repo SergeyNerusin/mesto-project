@@ -1,6 +1,5 @@
 /* jshint esversion:6 */
 
-import {page} from '../utils/constants.js';
 import {cleanValueAddCard} from '../utils/utils.js';
 
 function deleteClassError(){
@@ -15,13 +14,10 @@ function deleteClassError(){
 function openPopup(popupWindow){
   popupWindow.classList.add('popup_opened');
   document.addEventListener('keyup', listenKeyboard);
-  document.addEventListener('click', clickCross);
-  document.addEventListener('click', clickOverley);
 }
 
 function clickCross(evt){
   if(evt.target.classList.contains('popup__close')){
-    console.log('clickCross', evt.target);
     closePopup(document.querySelector('.popup_opened'));
     deleteClassError();
   }
@@ -29,22 +25,18 @@ function clickCross(evt){
 
 function clickOverley(evt){
   if(evt.target.classList.contains('popup')){
-    console.log('clickOverley', evt.target);
     closePopup(document.querySelector('.popup_opened'));
     deleteClassError();
   }
 }
 
 function closePopup(popupWindow){
-  console.log('popupWindow', popupWindow);
   popupWindow.classList.remove('popup_opened');
   document.removeEventListener('keyup', listenKeyboard);
-  document.removeEventListener('click', clickCross);
-  document.removeEventListener('click', clickOverley);
 }
 
 function listenKeyboard(evt){
-  const popupOpen = page.querySelector('.popup_opened');
+  const popupOpen = document.querySelector('.popup_opened');
   if((evt.key === 'Escape') && popupOpen){
       cleanValueAddCard();
       deleteClassError();
@@ -52,4 +44,4 @@ function listenKeyboard(evt){
     }
 }
 
-export {deleteClassError, openPopup, closePopup, listenKeyboard};
+export {deleteClassError, openPopup, closePopup, listenKeyboard, clickCross, clickOverley};

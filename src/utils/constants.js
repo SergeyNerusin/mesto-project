@@ -26,13 +26,14 @@ const dataSelectorValid = {
   errorClass: 'popup__input-error_active',
 };
 
-const page = document.querySelector('.page');
 const btnProfileEdit = document.querySelector('.profile__edit');
 const btnAddCard = document.querySelector('.profile__button');
 const profileName = document.querySelector('.profile__name');
 const profileProfession = document.querySelector('.profile__profession');
 const popupModalProfile = document.querySelector('.popup__profile');
 const popupModalCard = document.querySelector('.popup__card');
+const popupModalClose = document.querySelectorAll('.popup__close');
+const popupOverley = document.querySelectorAll('.popup');
 const imageModal = document.querySelector('.popup__card-image');
 const picture = document.querySelector('.popup__image');
 const pictureName = document.querySelector('.popup__image-caption');
@@ -46,4 +47,4 @@ const elementCard = document.querySelector('.cards');
 const template = document.querySelector('#oneCard').content;
 
 
-export {page, btnProfileEdit, btnAddCard, profileName, profileProfession, popupModalProfile, popupModalCard,  imageModal,  picture, pictureName, formEditProfile, nameInput, jobInput, formEditCard, nameCardInput, linkCardInput, initialCards, dataSelectorValid, elementCard, template};
+export {btnProfileEdit, btnAddCard, profileName, profileProfession, popupModalProfile, popupModalCard, popupModalClose, popupOverley, imageModal, picture, pictureName, formEditProfile, nameInput, jobInput, formEditCard, nameCardInput, linkCardInput, initialCards, dataSelectorValid, elementCard, template};

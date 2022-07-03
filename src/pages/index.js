@@ -1,10 +1,10 @@
 /* jshint esversion: 6 */
 
 import {cleanValueAddCard} from '../utils/utils.js';
-import {page, btnProfileEdit, btnAddCard, profileName, profileProfession, popupModalProfile, popupModalCard, formEditProfile, nameInput, jobInput, formEditCard, nameCardInput, linkCardInput, initialCards, dataSelectorValid, elementCard} from '../utils/constants.js';
+import {btnProfileEdit, btnAddCard, profileName, profileProfession, popupModalProfile, popupModalCard, popupModalClose, popupOverley, formEditProfile, nameInput, jobInput, formEditCard, nameCardInput, linkCardInput, initialCards, dataSelectorValid, elementCard} from '../utils/constants.js';
 import {enableValidation, toggleButtonState} from '../components/validate.js';
 import {createCard} from '../components/cards.js';
-import {deleteClassError, openPopup, closePopup, listenKeyboard} from '../components/modal.js';
+import {openPopup, closePopup, listenKeyboard, clickCross, clickOverley} from '../components/modal.js';
 
 import './index.css';
 
@@ -43,6 +43,9 @@ function addCard(oneCard){
 
 btnProfileEdit.addEventListener('click', openProfileEdit);
 btnAddCard.addEventListener('click', openAddCard);
+
+popupModalClose.forEach(el => el.addEventListener('click', clickCross));
+popupOverley.forEach(el => el.addEventListener('click', clickOverley));
 
 
 formEditProfile.addEventListener('submit', submitProfileform);
