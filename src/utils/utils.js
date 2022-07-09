@@ -1,10 +1,8 @@
 /*jshint esversion:6*/
 
-import {formEditCard} from '../utils/constants';
-
-function cleanValueAddCard(){
-   formEditCard.reset();
+function cleanValueForm(form){
+   form.reset();
 }
 
 
-export {cleanValueAddCard};
+export {cleanValueForm};

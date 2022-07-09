@@ -11,12 +11,12 @@
   background-size: 22px 22px;
   background-position: center;
   cursor: pointer;
+  transition: opacity .5s linear;
   padding: 0;
   margin: 0;
 }
 
 .profile__button:hover {
-  transition: opacity .5s linear;
   opacity: 0.6;
 }
 

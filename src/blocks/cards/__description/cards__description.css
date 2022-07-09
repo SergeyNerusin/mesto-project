@@ -1,4 +1,7 @@
 .cards__description {
+  width: 100%;
   display: flex;
   justify-content: space-between;
+  margin: 0;
+  padding: 0;
 }

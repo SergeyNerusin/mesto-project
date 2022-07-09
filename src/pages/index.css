@@ -8,7 +8,9 @@
 
 /* Профайл */
 @import url('../blocks/profile/profile.css');
+@import url('../blocks/profile/__foto-container/profile__foto-container.css');
 @import url('../blocks/profile/__avatar/profile__avatar.css');
+@import url('../blocks/profile/__btn-avatar/profile__btn-avatar');
 @import url('../blocks/profile/__line/profile__line.css');
 @import url('../blocks/profile/__info/profile__info.css');
 @import url('../blocks/profile/__name/profile__name.css');
@@ -24,7 +26,9 @@
 @import url('../blocks/cards/__trash/cards__trash.css');
 @import url('../blocks/cards/__description/cards__description.css');
 @import url('../blocks/cards/__title/cards__title.css');
+@import url('../blocks/cards/__container/cards__container.css');
 @import url('../blocks/cards/__like/cards__like.css');
+@import url('../blocks/cards/__like-count/cards__like-count.css');
 @import url('../blocks/cards/__like/_active/cards__like_active.css');
 
 
@@ -34,12 +38,14 @@
 
 /* Форма редактирования профайла */
 @import url('../blocks/popup/popup.css');
+@import url('../blocks/popup/__avtar/popup__avatar.css');
 @import url('../blocks/popup/__profile/popup__profile.css');
 @import url('../blocks/popup/__container/popup__container.css');
 @import url('../blocks/popup/__close/popup__close.css');
 @import url('../blocks/popup/__form/popup__form.css');
 @import url('../blocks/popup/__heading/popup__heading.css');
 @import url('../blocks/popup/__field/popup__field.css');
+@import url('../blocks/popup/__field-l/popup__field-l.css');
 @import url('../blocks/popup/__input/popup__input.css');
 @import url('../blocks/popup/__input/_type/popup__input_type_error.css');
 @import url('../blocks/popup/__input-error/popup__input-error.css');

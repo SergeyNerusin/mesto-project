@@ -16,21 +16,25 @@
     </header>
     <main>
       <section class="profile">
-        <img
-          src="<%=require('./images/Jacq_Cousteau.jpg')%>"
-          alt="Фото: Аватар пользователя"
-          class="profile__avatar"
-        />
+        <div class="profile__foto-container">
+          <img src="" alt="Фото: Аватар пользователя" class="profile__avatar" />
+
+          <button
+            title="Поменять аватар"
+            type="button"
+            class="profile__btn-avatar"
+          ></button>
+        </div>
         <div class="profile__info">
           <div class="profile__line">
-            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <h1 class="profile__name"></h1>
             <button
               title="Редактирование профиля"
               type="button"
               class="profile__edit"
             ></button>
           </div>
-          <p class="profile__profession">Исследователь океана</p>
+          <p class="profile__profession"></p>
         </div>
         <button
           title="Добавить фото-материал"
@@ -47,6 +51,32 @@
       <p class="footer__copyright">&copy;&nbsp;2020.&nbsp;Mesto Russia</p>
     </footer>
     <!-- Чтобы открыть модальное окно, необходимо добавить к классу popup модификатор popup_opened -->
+    <div class="popup popup__avatar">
+      <div class="popup__container">
+        <button
+          title="Закрыть без сохранения данных"
+          type="button"
+          class="popup__close"
+        ></button>
+        <form action="#" name="formAvatar" class="popup__form" novalidate>
+          <h2 class="popup__heading">Обновить аватар</h2>
+          <label class="popup__field popup__field-l">
+            <input
+              class="popup__input"
+              name="avatar"
+              type="url"
+              pattern="http(s)?://.+"
+              id="avatar"
+              placeholder="Ссылка на аватар "
+              value=""
+              required
+            />
+            <span class="popup__input-error" id="avatar-error"></span>
+          </label>
+          <button class="popup__button" type="submit">Сохранить</button>
+        </form>
+      </div>
+    </div>
     <div class="popup popup__profile">
       <div class="popup__container">
         <button
@@ -144,12 +174,15 @@
       </div>
     </div>
     <template id="oneCard">
-      <li class="cards__item">
+      <li class="cards__item" id="">
         <img class="cards__image" />
         <img class="cards__trash" />
         <div class="cards__description">
           <h3 class="cards__title"></h3>
-          <button title="#" type="button" class="cards__like"></button>
+          <div class="cards__container">
+            <button title="" type="button" class="cards__like"></button>
+            <span class="cards__like-count"></span>
+          </div>
         </div>
       </li>
     </template>

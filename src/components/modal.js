@@ -1,6 +1,6 @@
 /* jshint esversion:6 */
 
-import {cleanValueAddCard} from '../utils/utils.js';
+import {cleanValueForm} from '../utils/utils.js';
 
 function deleteClassError(){
   const spanError = Array.from(document.querySelectorAll('.popup__input'));
@@ -37,8 +37,9 @@ function closePopup(popupWindow){
 
 function listenKeyboard(evt){
   const popupOpen = document.querySelector('.popup_opened');
+  // const formName = popupOpen.querySelector('.popup__form').getAttribute('name');
+  // console.log('formName:', formName);
   if((evt.key === 'Escape') && popupOpen){
-      cleanValueAddCard();
       deleteClassError();
       closePopup(popupOpen);
     }

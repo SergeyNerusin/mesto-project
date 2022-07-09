@@ -1,0 +1,10 @@
+.cards__container {
+  width: 22px;
+  height: 35px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+  margin: 22px 20px 0 0;
+}
