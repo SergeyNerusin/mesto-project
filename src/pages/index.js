@@ -44,16 +44,14 @@ function submitProfileform (evt) {
   profileName.textContent = nameInput.value;
   profileProfession.textContent = jobInput.value;
   pullDataUser(nameInput.value, jobInput.value)
-  .tnen(console.log("Профиль:", res));
+  .then(res => console.log("Профиль:", res));
   closePopup(popupModalProfile);
 }
 
 function submitAddcard (evt) {
   evt.preventDefault();
   pullNewCard(nameCardInput.value, linkCardInput.value)
-  .then(card => console.log(card));
-  // const oneCardElement = createCard(linkCardInput.value, nameCardInput.value);
-  // addCard(oneCardElement);
+  .then(card => renderCard([card]));
   cleanValueForm(formAddCard);
   closePopup(popupModalCard);
 }
@@ -63,13 +61,11 @@ function addCard(oneCard){
 }
 
 function renderCard(cards){
-  // cards - массив карточек полученных с сервера
-  console.log(cards);
-  cards.forEach(card => {
-    // console.log('element:', card);
-    const oneCardElement = createCard(card.link, card.name, card._id, card.likes.length);
+  for(let i=0; i < cards.length; i++){
+    let card = cards[i];
+    const oneCardElement = createCard(card);
     addCard(oneCardElement);
-  });
+  }
 }
 
 Promise.all([getDataUser(), getInitialCards()])
@@ -78,11 +74,9 @@ Promise.all([getDataUser(), getInitialCards()])
     profileName.textContent = dataUser.name;
     profileProfession.textContent = dataUser.about;
     personId = dataUser._id;
-    // dataUser - данные пользователя полученные с сервера
-    console.log("DataUser", dataUser);
     renderCard(cards.reverse());
   })
-  .catch(err => console.log(err));
+.catch(err => console.log(err));
 
 btnAvatarEdit.addEventListener('click', openAvatarEdit);
 btnProfileEdit.addEventListener('click', openProfileEdit);
@@ -98,4 +92,4 @@ formAddCard.addEventListener('submit', submitAddcard);
 enableValidation(dataSelectorValid);
 
 
-export {listenKeyboard};
+export {personId, listenKeyboard};

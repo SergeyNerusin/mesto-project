@@ -20,7 +20,7 @@ const getDataUser = () => {
 
 /* отправить данные о пользователе на сервер */
 const pullDataUser = (nameUser, aboutUser) => {
-  fetch(`${config.baseUrl}/users/me`, {
+  return fetch(`${config.baseUrl}/users/me`, {
     method:"PATCH",
     headers: config.headers,
     body: JSON.stringify({
@@ -73,7 +73,7 @@ const deleteCard = (cardId) => {
 
 /* поставить лайк и отправить инфо на сервер */
 const putPullLike = (cardId) => {
-  fetch(`${config.baseUrl}/cards/likes/${cardId}`,  {
+  return fetch(`${config.baseUrl}/cards/likes/${cardId}`,  {
     method:"PUT",
     headers: config.headers
     })
@@ -82,7 +82,7 @@ const putPullLike = (cardId) => {
 
 /* удалить лак и отправить инфо на сервер */
 const deletePullLike = (cardId) => {
-  fetch(`${config.baseUrl}/cards/likes/${cardId}`,{
+  return fetch(`${config.baseUrl}/cards/likes/${cardId}`,{
     method: "DELETE",
     headers: config.headers
   })

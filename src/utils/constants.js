@@ -29,6 +29,7 @@ const profileProfession = document.querySelector('.profile__profession');
 const popupModalAvatar = document.querySelector('.popup__avatar');
 const popupModalProfile = document.querySelector('.popup__profile');
 const popupModalCard = document.querySelector('.popup__card');
+const popupModalAgreement =document.querySelector('.popup__agreement');
 const popupModalClose = document.querySelectorAll('.popup__close');
 const popupOverley = document.querySelectorAll('.popup');
 const imageModal = document.querySelector('.popup__card-image');
@@ -47,4 +48,4 @@ const template = document.querySelector('#oneCard').content;
 
 
 
-export {config, btnAvatarEdit, btnProfileEdit, btnAddCard, avatarUser, profileName, profileProfession, popupModalAvatar, popupModalProfile, popupModalCard, popupModalClose, popupOverley, imageModal, picture, pictureName, formEditAvatar, avatarInput,  formEditProfile, nameInput, jobInput, formAddCard, nameCardInput, linkCardInput, dataSelectorValid, elementCard, template};
+export {config, btnAvatarEdit, btnProfileEdit, btnAddCard, avatarUser, profileName, profileProfession, popupModalAvatar, popupModalProfile, popupModalCard, popupModalAgreement, popupModalClose, popupOverley, imageModal, picture, pictureName, formEditAvatar, avatarInput,  formEditProfile, nameInput, jobInput, formAddCard, nameCardInput, linkCardInput, dataSelectorValid, elementCard, template};
