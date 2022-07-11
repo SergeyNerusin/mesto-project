@@ -1,6 +1,6 @@
 /* jshint esversion: 8 */
 
-import {getDataUser, pullDataUser, getInitialCards, pullAvatar, pullNewCard, deleteCard, putPullLike, deletePullLike} from '../components/api.js';
+import {getDataUser, pullDataUser, getInitialCards, pullAvatar, pullNewCard} from '../components/api.js';
 import {cleanValueForm} from '../utils/utils.js';
 import { btnAvatarEdit, btnProfileEdit, btnAddCard, avatarUser, profileName, profileProfession, popupModalAvatar, popupModalProfile, popupModalCard, popupModalClose, popupOverley, formEditAvatar, avatarInput, formEditProfile, nameInput, jobInput, formAddCard, nameCardInput, linkCardInput, dataSelectorValid, elementCard} from '../utils/constants.js';
 import {enableValidation, toggleButtonState} from '../components/validate.js';
@@ -12,54 +12,91 @@ import './index.css';
 /* id пользователя - получаем с сервера  */
 let personId = "";
 
+/* открытие попапа редактирования аватарки */
 function openAvatarEdit(){
   cleanValueForm(formEditAvatar);
   toggleButtonState(dataSelectorValid, [avatarInput], formEditAvatar.querySelector('.popup__button'));
   openPopup(popupModalAvatar);
 }
 
+/* открытие попапа редактирования профиля */
 function openProfileEdit(){
   nameInput.value = profileName.textContent;
   jobInput.value = profileProfession.textContent;
   toggleButtonState(dataSelectorValid,[nameInput, jobInput], formEditProfile.querySelector('.popup__button'));
   openPopup(popupModalProfile);
 }
-
+/* открытие попапа для создания новой карточки */
 function openAddCard(){
   toggleButtonState(dataSelectorValid, [nameCardInput, linkCardInput], formAddCard.querySelector('.popup__button'));
   cleanValueForm(formAddCard);
   openPopup(popupModalCard);
 }
 
+/* показываем сохранение... в процессе получения ответа с сервера */
+function renderSave(isLoading, form, text=""){
+  const btn = form.querySelector('.popup__button');
+  if(isLoading){
+    btn.textContent = "Сохранение...";
+  } else
+  btn.textContent = `${text}`;
+}
+
+/* отправить новую ссылку аватарки на сервер, показать сохранение...,
+   получить ответ с данными с сервера, затем отрисовать аватарку */
 function submitAvatarform (evt){
   evt.preventDefault();
+  renderSave(true, formEditAvatar);
   pullAvatar(avatarInput.value)
-  .then(res => avatarUser.src = res.avatar);
-  cleanValueForm(formEditAvatar);
-  closePopup(popupModalAvatar);
+  .then(res => avatarUser.src = res.avatar)
+  .finally(()=>{
+    setTimeout(()=>{
+      closePopup(popupModalAvatar);
+      renderSave(false, formEditAvatar, 'Сохранить');
+    }, 500);
+  });
 }
 
+/* отправить данные профиля на сервер, показать сохранение...,
+   получить ответ с данными с сервера, показать изменение профиля */
 function submitProfileform (evt) {
   evt.preventDefault();
-  profileName.textContent = nameInput.value;
-  profileProfession.textContent = jobInput.value;
+  renderSave(true, formEditProfile);
   pullDataUser(nameInput.value, jobInput.value)
-  .then(res => console.log("Профиль:", res));
-  closePopup(popupModalProfile);
+  .then(data => {
+     profileName.textContent = data.name;
+     profileProfession.textContent = data.about;
+  })
+  .catch(err => console.log(err))
+  .finally(() => {
+    setTimeout(()=>{
+      closePopup(popupModalProfile);
+      renderSave(false, formEditProfile, 'Сохранить');
+    }, 500);
+  });
 }
 
+/* отправить данные новой карточки на сервер, показать сохранение...,
+   получить ответ с данными с сервера, затем отрисовать карточку */
 function submitAddcard (evt) {
   evt.preventDefault();
+  renderSave(true, formAddCard);
   pullNewCard(nameCardInput.value, linkCardInput.value)
-  .then(card => renderCard([card]));
-  cleanValueForm(formAddCard);
-  closePopup(popupModalCard);
+  .then(card => renderCard([card]))
+  .catch(err => console.log(err))
+  .finally(()=> {
+    setTimeout(()=>{
+      closePopup(popupModalCard);
+      renderSave(false, formAddCard, 'Создать');
+    }, 500);
+  });
 }
 
 function addCard(oneCard){
   elementCard.prepend(oneCard);
 }
 
+/* отрисовка карточек/карточки полученн(ых)/(ой) с сервера */
 function renderCard(cards){
   for(let i=0; i < cards.length; i++){
     let card = cards[i];
@@ -68,13 +105,15 @@ function renderCard(cards){
   }
 }
 
+/* как только будут получены ответы от сервера с данными на запросы
+  инфо о пользователе, и данных с карточками - начнём отрисовку данных на сайте */
 Promise.all([getDataUser(), getInitialCards()])
 .then(([dataUser, cards]) => {
     avatarUser.src =  dataUser.avatar;
     profileName.textContent = dataUser.name;
     profileProfession.textContent = dataUser.about;
-    personId = dataUser._id;
-    renderCard(cards.reverse());
+    personId = dataUser._id; // получаем свой id пользователя и сохраняем в глоб. переменной
+    renderCard(cards.reverse()); // масив объектов данными карточек сортируем в обратном порядке
   })
 .catch(err => console.log(err));
 

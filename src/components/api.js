@@ -2,15 +2,16 @@
 
 import {config} from "../utils/constants";
 
-const checkResponse = (res) =>{
+/* проверка статуса обращения на сервер */
+const checkResponse = (res) => {
   if (res.ok) {
         return res.json();
       } else {
-          return Promise.reject(console.log(`Ошибка: ${res.status}`));
+          return Promise.reject(`Ошибка: ${res.status}`);
         }
 };
 
-/* получить данные о пользователе с сервера */
+/* отправить запрос на сервер - получить данные пользователя с сервера */
 const getDataUser = () => {
   return fetch(`${config.baseUrl}/users/me`, {
     headers: config.headers
@@ -18,7 +19,7 @@ const getDataUser = () => {
   .then(res => checkResponse(res));
 };
 
-/* отправить данные о пользователе на сервер */
+/* отправить запрос и данные на сервер об изменении данных о пользователе */
 const pullDataUser = (nameUser, aboutUser) => {
   return fetch(`${config.baseUrl}/users/me`, {
     method:"PATCH",
@@ -30,7 +31,7 @@ const pullDataUser = (nameUser, aboutUser) => {
   .then(res => checkResponse(res));
 };
 
-/* получить данные карточек с сервера */
+/* отправить запрос с сервер на получение данных карточек */
 const getInitialCards = () => {
   return fetch(`${config.baseUrl}/cards`, {
     headers: config.headers
@@ -38,7 +39,7 @@ const getInitialCards = () => {
   .then(res => checkResponse(res));
 };
 
-/* отправить аватар на сервер */
+/* отправить на сервер данные ссылки новой аватарки */
 const pullAvatar = (urlAvatar) => {
   return fetch(`${config.baseUrl}/users/me/avatar`, {
     method:"PATCH",
@@ -62,7 +63,7 @@ const pullNewCard = (cardName, cardlink) => {
   .then(res => checkResponse(res));
 };
 
-/* удалить карточку с сервера */
+/* отправить запрос на удаление карточки с сервера */
 const deleteCard = (cardId) => {
   return  fetch(`${config.baseUrl}/cards/${cardId}`, {
     method: "DELETE",
@@ -71,7 +72,7 @@ const deleteCard = (cardId) => {
   .then(res => checkResponse(res));
 };
 
-/* поставить лайк и отправить инфо на сервер */
+/*  отправить инфо на сервер о том, что поставили лайк карточке */
 const putPullLike = (cardId) => {
   return fetch(`${config.baseUrl}/cards/likes/${cardId}`,  {
     method:"PUT",
@@ -80,7 +81,7 @@ const putPullLike = (cardId) => {
   .then(res => checkResponse(res));
 };
 
-/* удалить лак и отправить инфо на сервер */
+/* отправить инфо на сервер об удалении лайка с карточки */
 const deletePullLike = (cardId) => {
   return fetch(`${config.baseUrl}/cards/likes/${cardId}`,{
     method: "DELETE",
