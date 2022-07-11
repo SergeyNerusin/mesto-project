@@ -1,7 +1,5 @@
 /* jshint esversion:6 */
 
-import {cleanValueForm} from '../utils/utils.js';
-
 function deleteClassError(){
   const spanError = Array.from(document.querySelectorAll('.popup__input'));
   const inputError = Array.from(document.querySelectorAll('.popup__input-error'));
@@ -14,19 +12,20 @@ function deleteClassError(){
 function openPopup(popupWindow){
   popupWindow.classList.add('popup_opened');
   document.addEventListener('keyup', listenKeyboard);
+  deleteClassError();
 }
 
 function clickCross(evt){
-  if(evt.target.classList.contains('popup__close')){
-    closePopup(document.querySelector('.popup_opened'));
-    deleteClassError();
+  const openPopup = evt.target.closest('.popup_opened');
+  if(evt.target.classList.contains('popup__close') && openPopup){
+    closePopup(openPopup);
   }
 }
 
 function clickOverley(evt){
-  if(evt.target.classList.contains('popup')){
-    closePopup(document.querySelector('.popup_opened'));
-    deleteClassError();
+  const openPopup = evt.target.closest('.popup_opened');
+  if(evt.target.classList.contains('popup') && openPopup){
+    closePopup(openPopup);
   }
 }
 
@@ -36,13 +35,9 @@ function closePopup(popupWindow){
 }
 
 function listenKeyboard(evt){
-  const popupOpen = document.querySelector('.popup_opened');
-  // const formName = popupOpen.querySelector('.popup__form').getAttribute('name');
-  // console.log('formName:', formName);
-  if((evt.key === 'Escape') && popupOpen){
-      deleteClassError();
-      closePopup(popupOpen);
-    }
+  if(evt.key === 'Escape'){
+    closePopup(document.querySelector('.popup_opened'));
+  }
 }
 
 export {deleteClassError, openPopup, closePopup, listenKeyboard, clickCross, clickOverley};

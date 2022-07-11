@@ -39,25 +39,31 @@ function createCard(data) {
 
 /* поставить или убрать лайк */
 function toggleLike(selectorLike, selectorCountLike, cardId){
-  selectorLike.classList.toggle('cards__like_active');
   if (selectorLike.classList.contains('cards__like_active')){
-      putPullLike(cardId)
-      .then(data => { selectorCountLike.textContent = `${data.likes.length}`;})
-      .catch(err => console.log(err));
-    } else {
-      deletePullLike(cardId)
-      .then(data => { selectorCountLike.textContent = `${data.likes.length}`;})
-      .catch(err => console.log(err));
+    deletePullLike(cardId)
+    .then(data => {
+      selectorLike.classList.remove('cards__like_active');
+      selectorCountLike.textContent = `${data.likes.length}`;
+    })
+    .catch(err => console.log(err));
+  } else {
+    putPullLike(cardId)
+    .then(data => {
+      selectorLike.classList.add('cards__like_active');
+      selectorCountLike.textContent = `${data.likes.length}`;
+    })
+    .catch(err => console.log(err));
   }
 }
 
 /* удаление карточки при нажатии на козинку */
 function removeCard(card, cardId){
   deleteCard(cardId)
-  .then(data =>console.log('delete card:', data))
+  .then(data => {
+    card.remove();
+    closePopup(popupModalAgreement);
+  })
   .catch(err => console.log(err));
-  card.remove();
-  closePopup(popupModalAgreement);
 }
 
 /* открытие попапа подтверждения на удаление карточки */

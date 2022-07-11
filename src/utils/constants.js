@@ -1,6 +1,5 @@
 /* jshint esversion: 8 */
 
-
 /*Данные для входа на сервер*/
 const config = {
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort-12',
@@ -29,9 +28,9 @@ const profileProfession = document.querySelector('.profile__profession');
 const popupModalAvatar = document.querySelector('.popup__avatar');
 const popupModalProfile = document.querySelector('.popup__profile');
 const popupModalCard = document.querySelector('.popup__card');
-const popupModalAgreement =document.querySelector('.popup__agreement');
-const popupModalClose = document.querySelectorAll('.popup__close');
-const popupOverley = document.querySelectorAll('.popup');
+const popupModalAgreement = document.querySelector('.popup__agreement');
+const popupModalsCloses = document.querySelectorAll('.popup__close');
+const popupOverleys = document.querySelectorAll('.popup');
 const imageModal = document.querySelector('.popup__card-image');
 const picture = document.querySelector('.popup__image');
 const pictureName = document.querySelector('.popup__image-caption');
@@ -46,6 +45,4 @@ const linkCardInput = formAddCard.elements.link;
 const elementCard = document.querySelector('.cards');
 const template = document.querySelector('#oneCard').content;
 
-
-
-export {config, btnAvatarEdit, btnProfileEdit, btnAddCard, avatarUser, profileName, profileProfession, popupModalAvatar, popupModalProfile, popupModalCard, popupModalAgreement, popupModalClose, popupOverley, imageModal, picture, pictureName, formEditAvatar, avatarInput,  formEditProfile, nameInput, jobInput, formAddCard, nameCardInput, linkCardInput, dataSelectorValid, elementCard, template};
+export {config, btnAvatarEdit, btnProfileEdit, btnAddCard, avatarUser, profileName, profileProfession, popupModalAvatar, popupModalProfile, popupModalCard, popupModalAgreement, popupModalsCloses, popupOverleys, imageModal, picture, pictureName, formEditAvatar, avatarInput,  formEditProfile, nameInput, jobInput, formAddCard, nameCardInput, linkCardInput, dataSelectorValid, elementCard, template};

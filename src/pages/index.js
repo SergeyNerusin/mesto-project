@@ -2,7 +2,7 @@
 
 import {getDataUser, pullDataUser, getInitialCards, pullAvatar, pullNewCard} from '../components/api.js';
 import {cleanValueForm} from '../utils/utils.js';
-import { btnAvatarEdit, btnProfileEdit, btnAddCard, avatarUser, profileName, profileProfession, popupModalAvatar, popupModalProfile, popupModalCard, popupModalClose, popupOverley, formEditAvatar, avatarInput, formEditProfile, nameInput, jobInput, formAddCard, nameCardInput, linkCardInput, dataSelectorValid, elementCard} from '../utils/constants.js';
+import { btnAvatarEdit, btnProfileEdit, btnAddCard, avatarUser, profileName, profileProfession, popupModalAvatar, popupModalProfile, popupModalCard, popupModalsCloses, popupOverleys, formEditAvatar, avatarInput, formEditProfile, nameInput, jobInput, formAddCard, nameCardInput, linkCardInput, dataSelectorValid, elementCard} from '../utils/constants.js';
 import {enableValidation, toggleButtonState} from '../components/validate.js';
 import {createCard} from '../components/cards.js';
 import {openPopup, closePopup, listenKeyboard, clickCross, clickOverley} from '../components/modal.js';
@@ -48,13 +48,12 @@ function submitAvatarform (evt){
   evt.preventDefault();
   renderSave(true, formEditAvatar);
   pullAvatar(avatarInput.value)
-  .then(res => avatarUser.src = res.avatar)
-  .finally(()=>{
-    setTimeout(()=>{
-      closePopup(popupModalAvatar);
-      renderSave(false, formEditAvatar, 'Сохранить');
-    }, 500);
-  });
+  .then(res => {
+    avatarUser.src = res.avatar;
+  closePopup(popupModalAvatar);
+  })
+  .catch(err => console.log(err))
+  .finally(() => renderSave(false, formEditAvatar, 'Сохранить'));
 }
 
 /* отправить данные профиля на сервер, показать сохранение...,
@@ -64,16 +63,12 @@ function submitProfileform (evt) {
   renderSave(true, formEditProfile);
   pullDataUser(nameInput.value, jobInput.value)
   .then(data => {
-     profileName.textContent = data.name;
-     profileProfession.textContent = data.about;
+    profileName.textContent = data.name;
+    profileProfession.textContent = data.about;
+    closePopup(popupModalProfile);
   })
   .catch(err => console.log(err))
-  .finally(() => {
-    setTimeout(()=>{
-      closePopup(popupModalProfile);
-      renderSave(false, formEditProfile, 'Сохранить');
-    }, 500);
-  });
+  .finally(() => renderSave(false, formEditProfile, 'Сохранить'));
 }
 
 /* отправить данные новой карточки на сервер, показать сохранение...,
@@ -82,14 +77,12 @@ function submitAddcard (evt) {
   evt.preventDefault();
   renderSave(true, formAddCard);
   pullNewCard(nameCardInput.value, linkCardInput.value)
-  .then(card => renderCard([card]))
+  .then(card => {
+    renderCard([card]);
+    closePopup(popupModalCard);
+  })
   .catch(err => console.log(err))
-  .finally(()=> {
-    setTimeout(()=>{
-      closePopup(popupModalCard);
-      renderSave(false, formAddCard, 'Создать');
-    }, 500);
-  });
+  .finally(()=> renderSave(false, formAddCard, 'Создать'));
 }
 
 function addCard(oneCard){
@@ -99,7 +92,7 @@ function addCard(oneCard){
 /* отрисовка карточек/карточки полученн(ых)/(ой) с сервера */
 function renderCard(cards){
   for(let i=0; i < cards.length; i++){
-    let card = cards[i];
+    const card = cards[i];
     const oneCardElement = createCard(card);
     addCard(oneCardElement);
   }
@@ -121,8 +114,8 @@ btnAvatarEdit.addEventListener('click', openAvatarEdit);
 btnProfileEdit.addEventListener('click', openProfileEdit);
 btnAddCard.addEventListener('click', openAddCard);
 
-popupModalClose.forEach(el => el.addEventListener('click', clickCross));
-popupOverley.forEach(el => el.addEventListener('click', clickOverley));
+popupModalsCloses.forEach(el => el.addEventListener('click', clickCross));
+popupOverleys.forEach(el => el.addEventListener('click', clickOverley));
 
 formEditAvatar.addEventListener('submit', submitAvatarform);
 formEditProfile.addEventListener('submit', submitProfileform);

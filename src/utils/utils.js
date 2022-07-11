@@ -4,5 +4,4 @@ function cleanValueForm(form){
    form.reset();
 }
 
-
 export {cleanValueForm};
