@@ -12,7 +12,6 @@ function deleteClassError(){
 function openPopup(popupWindow){
   popupWindow.classList.add('popup_opened');
   document.addEventListener('keyup', listenKeyboard);
-  deleteClassError();
 }
 
 function clickCross(evt){

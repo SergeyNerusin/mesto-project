@@ -5,7 +5,7 @@ import {cleanValueForm} from '../utils/utils.js';
 import { btnAvatarEdit, btnProfileEdit, btnAddCard, avatarUser, profileName, profileProfession, popupModalAvatar, popupModalProfile, popupModalCard, popupModalsCloses, popupOverleys, formEditAvatar, avatarInput, formEditProfile, nameInput, jobInput, formAddCard, nameCardInput, linkCardInput, dataSelectorValid, elementCard} from '../utils/constants.js';
 import {enableValidation, toggleButtonState} from '../components/validate.js';
 import {createCard} from '../components/cards.js';
-import {openPopup, closePopup, listenKeyboard, clickCross, clickOverley} from '../components/modal.js';
+import { deleteClassError, openPopup, closePopup, listenKeyboard, clickCross, clickOverley} from '../components/modal.js';
 
 import './index.css';
 
@@ -15,12 +15,14 @@ let personId = "";
 /* открытие попапа редактирования аватарки */
 function openAvatarEdit(){
   cleanValueForm(formEditAvatar);
+  deleteClassError();
   toggleButtonState(dataSelectorValid, [avatarInput], formEditAvatar.querySelector('.popup__button'));
   openPopup(popupModalAvatar);
 }
 
 /* открытие попапа редактирования профиля */
 function openProfileEdit(){
+  deleteClassError();
   nameInput.value = profileName.textContent;
   jobInput.value = profileProfession.textContent;
   toggleButtonState(dataSelectorValid,[nameInput, jobInput], formEditProfile.querySelector('.popup__button'));
@@ -28,8 +30,9 @@ function openProfileEdit(){
 }
 /* открытие попапа для создания новой карточки */
 function openAddCard(){
-  toggleButtonState(dataSelectorValid, [nameCardInput, linkCardInput], formAddCard.querySelector('.popup__button'));
   cleanValueForm(formAddCard);
+  deleteClassError();
+  toggleButtonState(dataSelectorValid, [nameCardInput, linkCardInput], formAddCard.querySelector('.popup__button'));
   openPopup(popupModalCard);
 }
 
