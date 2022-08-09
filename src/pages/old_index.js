@@ -1,17 +1,17 @@
 /* jshint esversion: 8 */
-import {api} from '../components/Api.js';
-import {cleanValueForm} from '../utils/old_utils.js';
+
+import {getDataUser, pullDataUser, getInitialCards, pullAvatar, pullNewCard} from '../components/api.js';
+import {cleanValueForm} from '../utils/utils.js';
 import { btnAvatarEdit, btnProfileEdit, btnAddCard, avatarUser, profileName, profileProfession, popupModalAvatar, popupModalProfile, popupModalCard, popupModalsCloses, popupOverleys, formEditAvatar, avatarInput, formEditProfile, nameInput, jobInput, formAddCard, nameCardInput, linkCardInput, dataSelectorValid, elementCard} from '../utils/constants.js';
-import {enableValidation, toggleButtonState} from '../components/old_validate.js';
-import {createCard} from '../components/old_cards.js';
-import { deleteClassError, openPopup, closePopup, listenKeyboard, clickCross, clickOverley} from '../components/old_modal.js';
+import {enableValidation, toggleButtonState} from '../components/validate.js';
+import {createCard} from '../components/cards.js';
+import { deleteClassError, openPopup, closePopup, listenKeyboard, clickCross, clickOverley} from '../components/modal.js';
 
 import './index.css';
 
 /* id пользователя - получаем с сервера  */
 let personId = "";
 
-console.log("api:", api);
 /* открытие попапа редактирования аватарки */
 function openAvatarEdit(){
   cleanValueForm(formEditAvatar);
@@ -50,7 +50,7 @@ function renderSave(isLoading, form, text=""){
 function submitAvatarform (evt){
   evt.preventDefault();
   renderSave(true, formEditAvatar);
-  api.pullAvatar(avatarInput.value)
+  pullAvatar(avatarInput.value)
   .then(res => {
     avatarUser.src = res.avatar;
   closePopup(popupModalAvatar);
@@ -64,7 +64,7 @@ function submitAvatarform (evt){
 function submitProfileform (evt) {
   evt.preventDefault();
   renderSave(true, formEditProfile);
-  api.pullDataUser(nameInput.value, jobInput.value)
+  pullDataUser(nameInput.value, jobInput.value)
   .then(data => {
     profileName.textContent = data.name;
     profileProfession.textContent = data.about;
@@ -79,7 +79,7 @@ function submitProfileform (evt) {
 function submitAddcard (evt) {
   evt.preventDefault();
   renderSave(true, formAddCard);
-  api.pullNewCard(nameCardInput.value, linkCardInput.value)
+  pullNewCard(nameCardInput.value, linkCardInput.value)
   .then(card => {
     renderCard([card]);
     closePopup(popupModalCard);
@@ -103,7 +103,7 @@ function renderCard(cards){
 
 /* как только будут получены ответы от сервера с данными на запросы
   инфо о пользователе, и данных с карточками - начнём отрисовку данных на сайте */
-Promise.all([api.getDataUser(), api.getInitialCards()])
+Promise.all([getDataUser(), getInitialCards()])
 .then(([dataUser, cards]) => {
     avatarUser.src =  dataUser.avatar;
     profileName.textContent = dataUser.name;

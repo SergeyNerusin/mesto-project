@@ -1,10 +1,10 @@
 /* jshint esversion:6 */
 
-import {openPopup, closePopup} from './modal.js';
+import {openPopup, closePopup} from './old_modal.js';
 import {personId} from '../pages/index.js';
 import trash from '../images/trash.svg';
-import {template, imageModal, picture, pictureName,  popupModalAgreement,} from '../utils/constants.js';
-import {deleteCard, putPullLike, deletePullLike} from '../components/api.js';
+import {template, imageModal, picture, pictureName,  popupModalAgreement,} from '../utils/old_constants.js';
+import {api} from '../components/Api.js';
 
 /* подготовка карточки к отрисовке с проверкой на принадлежность обладателю */
 function createCard(data) {
@@ -15,6 +15,7 @@ function createCard(data) {
   const selectorCountLike = card.querySelector('.cards__like-count');
   const selectorTitle = card.querySelector('.cards__title');
   card.id = data._id;
+  // selectorImage.onerror = (err) => {card.remove(); console.log("ошибка загрузки", err);};
   selectorImage.src = data.link;
   selectorImage.alt = `Изображение: ${data.name}`;
   if(data.owner._id === personId){
@@ -40,14 +41,14 @@ function createCard(data) {
 /* поставить или убрать лайк */
 function toggleLike(selectorLike, selectorCountLike, cardId){
   if (selectorLike.classList.contains('cards__like_active')){
-    deletePullLike(cardId)
+    api.deletePullLike(cardId)
     .then(data => {
       selectorLike.classList.remove('cards__like_active');
       selectorCountLike.textContent = `${data.likes.length}`;
     })
     .catch(err => console.log(err));
   } else {
-    putPullLike(cardId)
+    api.putPullLike(cardId)
     .then(data => {
       selectorLike.classList.add('cards__like_active');
       selectorCountLike.textContent = `${data.likes.length}`;
@@ -58,7 +59,7 @@ function toggleLike(selectorLike, selectorCountLike, cardId){
 
 /* удаление карточки при нажатии на козинку */
 function removeCard(card, cardId){
-  deleteCard(cardId)
+  api.deleteCard(cardId)
   .then(data => {
     card.remove();
     closePopup(popupModalAgreement);
@@ -78,7 +79,7 @@ function setEventCardTrash(card, selectorTrash, cardId){
   selectorTrash.addEventListener('click', () => getAgreement(card, cardId));
 }
 
-/* устанока общих прослушивателей для всех карточек - при клике на сердечко - поставить или убрать лайк,
+/* установка общих прослушивателей для всех карточек - при клике на сердечко - поставить или убрать лайк,
    при клике на изображение карточки - развернуть изображение карточки  */
 function setEventListeners(selectorLike, selectorImage, selectorCountLike, cardLink, cardName, cardId) {
     selectorLike.addEventListener('click', () => toggleLike(selectorLike, selectorCountLike, cardId));

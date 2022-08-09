@@ -1,5 +1,14 @@
 /* jshint esversion: 8 */
 
+/*Данные для входа на сервер*/
+const config = {
+  baseUrl: 'https://nomoreparties.co/v1/plus-cohort-12',
+  headers: {
+    authorization: 'c6c844d5-a2d0-4fc9-b884-37783e126543',
+    'Content-Type': 'application/json'
+  }
+};
+
 /* Данные селкторов для валидации форм */
 const dataSelectorValid = {
   formSelector: '.popup__form',
@@ -36,4 +45,4 @@ const linkCardInput = formAddCard.elements.link;
 const elementCard = document.querySelector('.cards');
 const template = document.querySelector('#oneCard').content;
 
-export {btnAvatarEdit, btnProfileEdit, btnAddCard, avatarUser, profileName, profileProfession, popupModalAvatar, popupModalProfile, popupModalCard, popupModalAgreement, popupModalsCloses, popupOverleys, imageModal, picture, pictureName, formEditAvatar, avatarInput,  formEditProfile, nameInput, jobInput, formAddCard, nameCardInput, linkCardInput, dataSelectorValid, elementCard, template};
+export {config, btnAvatarEdit, btnProfileEdit, btnAddCard, avatarUser, profileName, profileProfession, popupModalAvatar, popupModalProfile, popupModalCard, popupModalAgreement, popupModalsCloses, popupOverleys, imageModal, picture, pictureName, formEditAvatar, avatarInput,  formEditProfile, nameInput, jobInput, formAddCard, nameCardInput, linkCardInput, dataSelectorValid, elementCard, template};
