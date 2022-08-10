@@ -8,7 +8,7 @@ class Api {
   }
 
   /* метод: - проверка статуса обращения на сервер */
-  checkResponse(res){
+  _checkResponse(res){
      if (res.ok) {
         return res.json();
       } else {
@@ -21,7 +21,7 @@ class Api {
     return fetch(`${this.baseUrl}/users/me`, {
     headers: this.headers
    })
-  .then(res => this.checkResponse(res));
+  .then(res => this._checkResponse(res));
   }
 
   /* метод: отправить запрос и данные на сервер об изменении данных о пользователе */
@@ -33,7 +33,7 @@ class Api {
     name: nameUser,
     about: aboutUser})
    })
-  .then(res => this.checkResponse(res));
+  .then(res => this._checkResponse(res));
   }
 
   /* метод: отправить запрос на сервер на получение данных карточек */
@@ -41,7 +41,7 @@ class Api {
     return fetch(`${this.baseUrl}/cards`, {
     headers: this.headers
    })
-  .then(res => this.checkResponse(res));
+  .then(res => this._checkResponse(res));
   }
 
   /* метод: отправить на сервер данные ссылки новой аватарки */
@@ -53,7 +53,7 @@ class Api {
     avatar: urlAvatar
     })
   })
-  .then(res => this.checkResponse(res));
+  .then(res => this._checkResponse(res));
   }
 
   /* метод: отправить данные новой карточки на сервер */
@@ -65,7 +65,7 @@ class Api {
     name: cardName,
     link: cardlink})
    })
-  .then(res => this.checkResponse(res));
+  .then(res => this._checkResponse(res));
   }
 
   /* метод: отправить запрос на удаление карточки с сервера */
@@ -74,7 +74,7 @@ class Api {
     method: "DELETE",
     headers: this.headers
    })
-  .then(res => this.checkResponse(res));
+  .then(res => this._checkResponse(res));
   }
 
   /* метод: отправить инфо на сервер о том, что поставили лайк карточке */
@@ -83,7 +83,7 @@ class Api {
     method:"PUT",
     headers: this.headers
     })
-  .then(res => this.checkResponse(res));
+  .then(res => this._checkResponse(res));
   }
 
   /* метод: отправить инфо на сервер об удалении лайка с карточки */
@@ -92,11 +92,11 @@ class Api {
     method: "DELETE",
     headers: this.headers
   })
-  .then(res => this.checkResponse(res));
+  .then(res => this._checkResponse(res));
   }
 }
 
-
+// на основе класса Api создаём объект api
 export const api = new Api({
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort-12',
   headers: {

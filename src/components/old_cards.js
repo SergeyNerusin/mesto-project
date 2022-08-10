@@ -4,7 +4,7 @@ import {openPopup, closePopup} from './old_modal.js';
 import {personId} from '../pages/index.js';
 import trash from '../images/trash.svg';
 import {template, imageModal, picture, pictureName,  popupModalAgreement,} from '../utils/old_constants.js';
-import {api} from '../components/Api.js';
+import {api} from './Api.js';
 
 /* подготовка карточки к отрисовке с проверкой на принадлежность обладателю */
 function createCard(data) {
