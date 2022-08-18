@@ -39,7 +39,7 @@ const isValid = (dataObj, formElement, inputElement) => {
   }
 };
 
-const setEventListeners = (dataObj,formElement) => {
+const setEventListeners = (dataObj, formElement) => {
   const inputList = Array.from(formElement.querySelectorAll(dataObj.inputSelector));
   const buttonElement = formElement.querySelector(dataObj.submitButtonSelector);
   toggleButtonState(dataObj, inputList, buttonElement);

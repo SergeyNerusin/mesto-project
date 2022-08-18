@@ -1,13 +1,20 @@
 /* jshint esversion: 8 */
 
-/* Данные селкторов для валидации форм */
-const dataSelectorValid = {
+/* Данные селекторов для валидации форм */
+export const dataSelectorValid = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__button',
   inactiveButtonClass: 'popup__button_inactive',
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__input-error_active',
+};
+
+/* Данные селекторов формы профайла */
+export const plofileSelectors = {
+  profileName: '.profile__name',
+  profileProfession: '.profile__profession',
+  profileAvatar: '.profile__avatar'
 };
 
 const btnAvatarEdit = document.querySelector('.profile__btn-avatar');
@@ -36,4 +43,4 @@ const linkCardInput = formAddCard.elements.link;
 const elementCard = document.querySelector('.cards');
 const template = document.querySelector('#oneCard').content;
 
-export {btnAvatarEdit, btnProfileEdit, btnAddCard, avatarUser, profileName, profileProfession, popupModalAvatar, popupModalProfile, popupModalCard, popupModalAgreement, popupModalsCloses, popupOverleys, imageModal, picture, pictureName, formEditAvatar, avatarInput,  formEditProfile, nameInput, jobInput, formAddCard, nameCardInput, linkCardInput, dataSelectorValid, elementCard, template};
+

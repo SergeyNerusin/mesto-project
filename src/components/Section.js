@@ -17,9 +17,18 @@
     У класса Section нет своей разметки,он получает разметку через функцию-колбэк и вставляет её в контейнер.
 */
 
-
 export default class Section{
-  constructor({items, renderer}, selectorContainer ){
+  constructor({items, renderer}, selectorContainer){
+    this._items = items;
+    this._renderer = renderer;
+    this._container = selectorContainer;
+  }
 
+  renderItems(){
+    this._items.forEach(item => this._renderer(item));
+  }
+
+  addItem(item) {
+    this._container.append(item);
   }
 }

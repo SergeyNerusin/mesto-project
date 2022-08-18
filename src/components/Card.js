@@ -52,7 +52,7 @@ export default class Card{
     this._selectorLike.title = 'Поставить отметку: Нравится';
     this._selectorCountLike.textContent =`${this._likes}`;
     this._selectorTitle.textContent = this._name;
-    this.setEventListeners();
+    this._setEventListeners();
     return this._card;
   }
 
@@ -91,7 +91,7 @@ export default class Card{
 
    /* метод: установка общих прослушивателей для всех карточек - при клике на сердечко - поставить или убрать лайк,
    при клике на изображение карточки - развернуть изображение карточки  */
-  setEventListeners() {
+  _setEventListeners() {
     this._selectorLike.addEventListener('click', () => this._handleClickLikeCard(this._selectorLike, this._selectorCountLike, this._cardId));
     this._selectorImage.addEventListener('click', () => this._handleOpenImgCardClick(this._link, this._name));
   }
