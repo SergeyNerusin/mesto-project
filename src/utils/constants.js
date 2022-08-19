@@ -1,6 +1,9 @@
 /* jshint esversion: 8 */
 
 
+export const containerCard = document.querySelector('.cards'); // контайнер для отрисовки карточек
+export const template = document.querySelector('#oneCard').content;
+
 /*Данные для входа на сервер*/
 export const configApi = {
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort-12',
@@ -21,10 +24,19 @@ export const dataSelectorValid = {
 };
 
 /* Данные селекторов формы профайла */
-export const plofileSelectors = {
+export const profileSelectors = {
   profileName: '.profile__name',
   profileProfession: '.profile__profession',
   profileAvatar: '.profile__avatar'
+};
+
+/* Селектора модальных окон */
+export const popupSelectors = {
+  popupAvatar: '.popup__avatar',
+  popupProfile:'.popup__profile',
+  popupAddCard: '.popup__card',
+  popupShowImage: '.popup__card-image',
+  popupEgreement: '.popup__agreement'
 };
 
 const btnAvatarEdit = document.querySelector('.profile__btn-avatar');
@@ -50,7 +62,7 @@ const jobInput = formEditProfile.elements.profession;
 const formAddCard = document.forms.formCard;
 const nameCardInput = formAddCard.elements.card;
 const linkCardInput = formAddCard.elements.link;
-const elementCard = document.querySelector('.cards');
-const template = document.querySelector('#oneCard').content;
+
+
 
 

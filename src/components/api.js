@@ -11,7 +11,7 @@
     Внедряйте методы класса Api в другие классы через передачу колбэк-функций.
 
 */
-class Api {
+export default class Api {
   constructor(options) {
     this.baseUrl = options.baseUrl;
     this.headers = options.headers;
@@ -106,12 +106,5 @@ class Api {
   }
 }
 
-// на основе класса Api создаём объект api
-export const api = new Api({
-  baseUrl: 'https://nomoreparties.co/v1/plus-cohort-12',
-  headers: {
-    authorization: 'c6c844d5-a2d0-4fc9-b884-37783e126543',
-    'Content-Type': 'application/json'
-  }
-});
+
 

@@ -20,12 +20,14 @@ export default class PopupWithImage extends Popup{
   open(title, link){
     super.open();
     this._image.src = link;
+    this._image.alt = title;
     this._caption = title;
   }
 
   close(){
     super.close();
     this._image.src = '';
+    this._image.alt = '';
     this._caption = '';
   }
 }

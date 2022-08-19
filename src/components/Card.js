@@ -23,7 +23,7 @@ export default class Card{
     this._id = dataCard._id; // id будущей карточки
     this._trash = trash; // картинка корзинки - удаление карточки
     this._ownerId = dataCard.owner._id; // владелец карточки
-    this._likes = dataCard.likes; // получаем обект в котором инфо о тех кто лайкнул карточку
+    this._likes = dataCard.likes; // получаем объект в котором инфо о тех кто лайкнул карточку
     this._personId = personId; // мой id пользователя
     this._selectorTemplate = cardSelectorTemplate; // селектор разметки templete тега
     this._handleOpenImgCardClick = handleImagezoomCardClick; // развернуть картинку карточки при клике по ней

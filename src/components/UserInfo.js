@@ -28,20 +28,17 @@
 
    Поэтому нам нужно сделать следующее:
    При загрузке страницы получить данные с сервера (метод класса Api)
-    Сохранить данные на странице при помощи метода setUserInfo класса UserInfo
-    Если эти данные будут нужны еще где-то на странице, то получить их воспользовавшись методом getUserInfo класса UserInfo
-    Если данные нужно будет сохранить на сервере, то обращаемся к методу setUserInfo класса Api и не забываем обновить данные на странице,
-    вызвав setUserInfo класса UserInfo.
+   Сохранить данные на странице при помощи метода setUserInfo класса UserInfo
+   Если эти данные будут нужны еще где-то на странице, то получить их воспользовавшись методом getUserInfo класса UserInfo
+   Если данные нужно будет сохранить на сервере, то обращаемся к методу setUserInfo класса Api и не забываем обновить данные на странице, вызвав setUserInfo класса UserInfo.
 
 */
 
-
 export default class UserInfo {
-  constructor({profileName, profileProfession, profileAvatar}, getUserInfoApi){
+  constructor({profileName, profileProfession, profileAvatar}){
     this.profileName = document.querySelector(profileName);
     this.profileProfession = document.querySelector(profileProfession);
     this.profileAvatar = document.querySelector(profileAvatar);
-    this.getUserInfoApi = document.querySelector(getUserInfoApi);
   }
 
   setUserinfo(name, profession ){
