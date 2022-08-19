@@ -1,5 +1,15 @@
 /* jshint esversion: 8 */
 
+
+/*Данные для входа на сервер*/
+export const configApi = {
+  baseUrl: 'https://nomoreparties.co/v1/plus-cohort-12',
+  headers: {
+    authorization: 'c6c844d5-a2d0-4fc9-b884-37783e126543',
+    'Content-Type': 'application/json'
+  }
+};
+
 /* Данные селекторов для валидации форм */
 export const dataSelectorValid = {
   formSelector: '.popup__form',

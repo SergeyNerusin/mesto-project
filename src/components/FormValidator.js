@@ -16,11 +16,10 @@
 
 export default class FormValidator{
   constructor(dataObj, formElement){
-   this._dataObj = dataObj;  // объект с данными селекторов формы
    this._form = formElement; // форма которая валидируется
    this._inputEror = dataObj.inputErrorClass; // добавление класса подсветки бордера инпута при ошибке ввода
    this._showError = dataObj.errorClass; // селектор ошибки - показать ошибку.
-   this._btnInactive = dataObj.inactiveButtonClass;
+   this._btnInactive = dataObj.inactiveButtonClass; // добавочный класс кнопки меняет цвет кнопки в зависимости от активная/неактивная
    this._inputList = Array.from(this._form.querySelectorAll(this._dataObj.inputSelector)); // поля ввода формы которые будут валидироваться
    this._buttonElement = this._form.querySelector(this._dataObj.submitButtonSelector); // кнопка отправки сообщения
   }
@@ -36,7 +35,7 @@ export default class FormValidator{
     const errorElement = this._form.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.remove(this._inputEror);
     errorElement.classList.remove(this._showError);
-    errorElement.textContent = "";
+    errorElement.textContent = '';
   }
 
   _hasInvalidInput(){
@@ -44,7 +43,7 @@ export default class FormValidator{
   }
 
   _toggleButtonState(){
-    if (_hasInvalidInput()) {
+    if (this._hasInvalidInput()) {
         this._buttonElement.classList.add(this._btnInactive);
         this._buttonElement.setAttribute('disabled','');
       } else {
@@ -55,27 +54,27 @@ export default class FormValidator{
 
   _isValid(inputElement){
     if (!inputElement.validity.valid) {
-        _showInputError(inputElement, inputElement.validationMessage);
+        this._showInputError(inputElement, inputElement.validationMessage);
       } else {
-          _hideInputError(inputElement);
+          this._hideInputError(inputElement);
     }
   }
 
   _setEventListeners() {
-    _toggleButtonState();
+    this._toggleButtonState();
     this._inputList.forEach(inputElement => {
         inputElement.addEventListener('input', () => {
           isValid(inputElement);
-          _toggleButtonState();
+          this._toggleButtonState();
         });
     });
   }
 
-  dellMassegeClassError() {
+  cleanValidError() {
     this._inputList.forEach(inputElement => {
       inputElement.addEventListener('input', () => {
-        _hideInputError(inputElement);
-        _toggleButtonState();
+        this._hideInputError(inputElement);
+        this._toggleButtonState();
       });
     });
   }
