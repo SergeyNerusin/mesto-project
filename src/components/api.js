@@ -1,93 +1,110 @@
-/* jshint esversion: 8 */
+/* jshint esversion:6 */
 
-import {config} from "../utils/constants";
+/*
+        ***Создание класса Api***
+    В предыдущем месяце вы создавали отдельный файл api.js.
+    Организуйте в файле класс Api, в конструкторе которого будет содержаться URL
+    и заголовки для запросов, а методы класса будут обозначать работу с разными эндпоинтами.
+    Обратите внимание, что многие другие классы (PopupWithForm, Card, UserInfo) будут
+    взаимодействовать с методами класса Api. Для решения этой задачи очень хорошо подойдёт материал,
+    который вы изучите в последней теме по ООП.
+    Внедряйте методы класса Api в другие классы через передачу колбэк-функций.
 
-/* проверка статуса обращения на сервер */
-const checkResponse = (res) => {
-  if (res.ok) {
+*/
+export default class Api {
+  constructor(options) {
+    this.baseUrl = options.baseUrl;
+    this.headers = options.headers;
+  }
+
+  /* метод: - проверка статуса обращения на сервер */
+  _checkResponse(res){
+     if (res.ok) {
         return res.json();
       } else {
           return Promise.reject(`Ошибка: ${res.status}`);
         }
-};
+  }
 
-/* отправить запрос на сервер - получить данные пользователя с сервера */
-const getDataUser = () => {
-  return fetch(`${config.baseUrl}/users/me`, {
-    headers: config.headers
+  /* метод: - отправить запрос на сервер - получить данные пользователя с сервера */
+  getDataUser(){
+    return fetch(`${this.baseUrl}/users/me`, {
+    headers: this.headers
    })
-  .then(res => checkResponse(res));
-};
+  .then(res => this._checkResponse(res));
+  }
 
-/* отправить запрос и данные на сервер об изменении данных о пользователе */
-const pullDataUser = (nameUser, aboutUser) => {
-  return fetch(`${config.baseUrl}/users/me`, {
+  /* метод: отправить запрос и данные на сервер об изменении данных о пользователе */
+  pullDataUser(nameUser, aboutUser){
+    return fetch(`${this.baseUrl}/users/me`, {
     method:"PATCH",
-    headers: config.headers,
+    headers: this.headers,
     body: JSON.stringify({
     name: nameUser,
     about: aboutUser})
    })
-  .then(res => checkResponse(res));
-};
+  .then(res => this._checkResponse(res));
+  }
 
-/* отправить запрос с сервер на получение данных карточек */
-const getInitialCards = () => {
-  return fetch(`${config.baseUrl}/cards`, {
-    headers: config.headers
+  /* метод: отправить запрос на сервер на получение данных карточек */
+  getInitialCards() {
+    return fetch(`${this.baseUrl}/cards`, {
+    headers: this.headers
    })
-  .then(res => checkResponse(res));
-};
+  .then(res => this._checkResponse(res));
+  }
 
-/* отправить на сервер данные ссылки новой аватарки */
-const pullAvatar = (urlAvatar) => {
-  return fetch(`${config.baseUrl}/users/me/avatar`, {
+  /* метод: отправить на сервер данные ссылки новой аватарки */
+  pullAvatar(urlAvatar){
+    return fetch(`${this.baseUrl}/users/me/avatar`, {
     method:"PATCH",
-    headers: config.headers,
+    headers: this.headers,
     body: JSON.stringify({
     avatar: urlAvatar
     })
   })
-  .then(res => checkResponse(res));
-};
+  .then(res => this._checkResponse(res));
+  }
 
-/* отправить данные новой карточки на сервер */
-const pullNewCard = (cardName, cardlink) => {
-  return  fetch(`${config.baseUrl}/cards`, {
+  /* метод: отправить данные новой карточки на сервер */
+  pullNewCard(cardName, cardlink){
+    return  fetch(`${this.baseUrl}/cards`, {
     method: "POST",
-    headers: config.headers,
+    headers: this.headers,
     body: JSON.stringify({
     name: cardName,
     link: cardlink})
    })
-  .then(res => checkResponse(res));
-};
+  .then(res => this._checkResponse(res));
+  }
 
-/* отправить запрос на удаление карточки с сервера */
-const deleteCard = (cardId) => {
-  return  fetch(`${config.baseUrl}/cards/${cardId}`, {
+  /* метод: отправить запрос на удаление карточки с сервера */
+  deleteCard(cardId){
+   return  fetch(`${this.baseUrl}/cards/${cardId}`, {
     method: "DELETE",
-    headers: config.headers
+    headers: this.headers
    })
-  .then(res => checkResponse(res));
-};
+  .then(res => this._checkResponse(res));
+  }
 
-/*  отправить инфо на сервер о том, что поставили лайк карточке */
-const putPullLike = (cardId) => {
-  return fetch(`${config.baseUrl}/cards/likes/${cardId}`,  {
+  /* метод: отправить инфо на сервер о том, что поставили лайк карточке */
+  putPullLike(cardId){
+    return fetch(`${this.baseUrl}/cards/likes/${cardId}`,  {
     method:"PUT",
-    headers: config.headers
+    headers: this.headers
     })
-  .then(res => checkResponse(res));
-};
+  .then(res => this._checkResponse(res));
+  }
 
-/* отправить инфо на сервер об удалении лайка с карточки */
-const deletePullLike = (cardId) => {
-  return fetch(`${config.baseUrl}/cards/likes/${cardId}`,{
+  /* метод: отправить инфо на сервер об удалении лайка с карточки */
+  deletePullLike(cardId){
+    return fetch(`${this.baseUrl}/cards/likes/${cardId}`,{
     method: "DELETE",
-    headers: config.headers
+    headers: this.headers
   })
-  .then(res => checkResponse(res));
-};
+  .then(res => this._checkResponse(res));
+  }
+}
 
-export {getDataUser, pullDataUser, getInitialCards, pullAvatar, pullNewCard, deleteCard, putPullLike, deletePullLike};
+
+

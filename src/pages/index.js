@@ -1,96 +1,56 @@
 /* jshint esversion: 8 */
 
-import {getDataUser, pullDataUser, getInitialCards, pullAvatar, pullNewCard} from '../components/api.js';
-import {cleanValueForm} from '../utils/utils.js';
-import { btnAvatarEdit, btnProfileEdit, btnAddCard, avatarUser, profileName, profileProfession, popupModalAvatar, popupModalProfile, popupModalCard, popupModalsCloses, popupOverleys, formEditAvatar, avatarInput, formEditProfile, nameInput, jobInput, formAddCard, nameCardInput, linkCardInput, dataSelectorValid, elementCard} from '../utils/constants.js';
-import {enableValidation, toggleButtonState} from '../components/validate.js';
-import {createCard} from '../components/cards.js';
-import { deleteClassError, openPopup, closePopup, listenKeyboard, clickCross, clickOverley} from '../components/modal.js';
+import Api from '../components/Api.js';
+import Card from '../components/Card.js';
+import FormValidator from '..components/FormValidator.js';
+import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithImage from '../components/PopupWithImage.js';
+import Section from '../components/Section.js';
+import UserInfo from '../components/UserInfo.js';
+import * as constants from '../utils/constants.js';
 
 import './index.css';
 
 /* id пользователя - получаем с сервера  */
 let personId = "";
+const trash ='../images/trash.svg';
 
-/* открытие попапа редактирования аватарки */
-function openAvatarEdit(){
-  cleanValueForm(formEditAvatar);
-  deleteClassError();
-  toggleButtonState(dataSelectorValid, [avatarInput], formEditAvatar.querySelector('.popup__button'));
-  openPopup(popupModalAvatar);
-}
+export const api = new Api(constants.configApi);
+const dataProfileUser = new UserInfo(constants.plofileSelectors);
+const popupShowCardImage = new PopupWithImage(constants.popupSelectors.popupShowImage);
+popupShowCardImage.setEventListeners();
+const popupConfirmDel = new PopupWithEgrement(constants.popupSelectors.popupEgreement);
 
-/* открытие попапа редактирования профиля */
-function openProfileEdit(){
-  deleteClassError();
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileProfession.textContent;
-  toggleButtonState(dataSelectorValid,[nameInput, jobInput], formEditProfile.querySelector('.popup__button'));
-  openPopup(popupModalProfile);
-}
-/* открытие попапа для создания новой карточки */
-function openAddCard(){
-  cleanValueForm(formAddCard);
-  deleteClassError();
-  toggleButtonState(dataSelectorValid, [nameCardInput, linkCardInput], formAddCard.querySelector('.popup__button'));
-  openPopup(popupModalCard);
-}
-
-/* показываем сохранение... в процессе получения ответа с сервера */
-function renderSave(isLoading, form, text=""){
-  const btn = form.querySelector('.popup__button');
-  if(isLoading){
-    btn.textContent = "Сохранение...";
-  } else
-  btn.textContent = `${text}`;
-}
-
-/* отправить новую ссылку аватарки на сервер, показать сохранение...,
-   получить ответ с данными с сервера, затем отрисовать аватарку */
-function submitAvatarform (evt){
-  evt.preventDefault();
-  renderSave(true, formEditAvatar);
-  pullAvatar(avatarInput.value)
-  .then(res => {
-    avatarUser.src = res.avatar;
-  closePopup(popupModalAvatar);
-  })
-  .catch(err => console.log(err))
-  .finally(() => renderSave(false, formEditAvatar, 'Сохранить'));
-}
-
-/* отправить данные профиля на сервер, показать сохранение...,
-   получить ответ с данными с сервера, показать изменение профиля */
-function submitProfileform (evt) {
-  evt.preventDefault();
-  renderSave(true, formEditProfile);
-  pullDataUser(nameInput.value, jobInput.value)
-  .then(data => {
-    profileName.textContent = data.name;
-    profileProfession.textContent = data.about;
-    closePopup(popupModalProfile);
-  })
-  .catch(err => console.log(err))
-  .finally(() => renderSave(false, formEditProfile, 'Сохранить'));
-}
-
-/* отправить данные новой карточки на сервер, показать сохранение...,
-   получить ответ с данными с сервера, затем отрисовать карточку */
-function submitAddcard (evt) {
-  evt.preventDefault();
-  renderSave(true, formAddCard);
-  pullNewCard(nameCardInput.value, linkCardInput.value)
-  .then(card => {
-    renderCard([card]);
-    closePopup(popupModalCard);
-  })
-  .catch(err => console.log(err))
-  .finally(()=> renderSave(false, formAddCard, 'Создать'));
-}
-
-function addCard(oneCard){
-  elementCard.prepend(oneCard);
-}
+const containerCards = new Section({
+  items,
+  renderer: () => {
+    const card = new Card(
+      dataCard,
+      personId,
+      trash,
+      constants.template,
+      {handleClickLikeCard: ()=>{
+         if (this._selectorLike.classList.contains('cards__like_active')){
+            api.deletePullLike()
+            .then(() => {
+            this.dellCardLike();})
+            .catch(err => console.log(err));
+          } else {
+            api.putPullLike()
+            .then(() => {
+            this.putCardLike(); })
+            .catch(err => console.log(err));
+          }
+        }
+      },
+      {handleImagezoomCardClick: (title, link)=> {
+        popupShowCardImage.open(title, link);
+      }},
+      {openPopupConfirmCardDeleting: ()=> {
+        popupConfirmDel.open(id)  // недоведено до ума...
+      }});
+  }
+}, constants.containerCard);
 
 /* отрисовка карточек/карточки полученн(ых)/(ой) с сервера */
 function renderCard(cards){
@@ -103,13 +63,12 @@ function renderCard(cards){
 
 /* как только будут получены ответы от сервера с данными на запросы
   инфо о пользователе, и данных с карточками - начнём отрисовку данных на сайте */
-Promise.all([getDataUser(), getInitialCards()])
+Promise.all([api.getDataUser(), api.getInitialCards()])
 .then(([dataUser, cards]) => {
-    avatarUser.src =  dataUser.avatar;
-    profileName.textContent = dataUser.name;
-    profileProfession.textContent = dataUser.about;
+    dataProfileUser.setUserAvatar(dataUser.avatar);
+    dataProfileUser.setUserinfo(dataUser.name, dataUser.about);
     personId = dataUser._id; // получаем свой id пользователя и сохраняем в глоб. переменной
-    renderCard(cards.reverse()); // масив объектов данными карточек сортируем в обратном порядке
+    renderCard(cards.reverse()); // масив объектов с данными карточек сортируем в обратном порядке
   })
 .catch(err => console.log(err));
 
@@ -125,6 +84,5 @@ formEditProfile.addEventListener('submit', submitProfileform);
 formAddCard.addEventListener('submit', submitAddcard);
 
 enableValidation(dataSelectorValid);
-
 
 export {personId, listenKeyboard};

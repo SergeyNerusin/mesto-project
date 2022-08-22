@@ -1,11 +1,7 @@
 /* jshint esversion: 8 */
 
-
-export const containerCard = document.querySelector('.cards'); // контайнер для отрисовки карточек
-export const template = document.querySelector('#oneCard').content;
-
 /*Данные для входа на сервер*/
-export const configApi = {
+const config = {
   baseUrl: 'https://nomoreparties.co/v1/plus-cohort-12',
   headers: {
     authorization: 'c6c844d5-a2d0-4fc9-b884-37783e126543',
@@ -13,30 +9,14 @@ export const configApi = {
   }
 };
 
-/* Данные селекторов для валидации форм */
-export const dataSelectorValid = {
+/* Данные селкторов для валидации форм */
+const dataSelectorValid = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
   submitButtonSelector: '.popup__button',
   inactiveButtonClass: 'popup__button_inactive',
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__input-error_active',
-};
-
-/* Данные селекторов формы профайла */
-export const profileSelectors = {
-  profileName: '.profile__name',
-  profileProfession: '.profile__profession',
-  profileAvatar: '.profile__avatar'
-};
-
-/* Селектора модальных окон */
-export const popupSelectors = {
-  popupAvatar: '.popup__avatar',
-  popupProfile:'.popup__profile',
-  popupAddCard: '.popup__card',
-  popupShowImage: '.popup__card-image',
-  popupEgreement: '.popup__agreement'
 };
 
 const btnAvatarEdit = document.querySelector('.profile__btn-avatar');
@@ -62,7 +42,7 @@ const jobInput = formEditProfile.elements.profession;
 const formAddCard = document.forms.formCard;
 const nameCardInput = formAddCard.elements.card;
 const linkCardInput = formAddCard.elements.link;
+const elementCard = document.querySelector('.cards');
+const template = document.querySelector('#oneCard').content;
 
-
-
-
+export {config, btnAvatarEdit, btnProfileEdit, btnAddCard, avatarUser, profileName, profileProfession, popupModalAvatar, popupModalProfile, popupModalCard, popupModalAgreement, popupModalsCloses, popupOverleys, imageModal, picture, pictureName, formEditAvatar, avatarInput,  formEditProfile, nameInput, jobInput, formAddCard, nameCardInput, linkCardInput, dataSelectorValid, elementCard, template};
