@@ -14,17 +14,24 @@
   Для каждой проверяемой формы создавайте экземпляр класса FormValidator.
 */
 
-export default class FormValidator{
-  constructor(dataObj, formElement){
-   this._form = formElement; // форма которая валидируется
-   this._inputEror = dataObj.inputErrorClass; // добавление класса подсветки бордера инпута при ошибке ввода
-   this._showError = dataObj.errorClass; // селектор ошибки - показать ошибку.
-   this._btnInactive = dataObj.inactiveButtonClass; // добавочный класс кнопки меняет цвет кнопки в зависимости от активная/неактивная
-   this._inputList = Array.from(this._form.querySelectorAll(this._dataObj.inputSelector)); // поля ввода формы которые будут валидироваться
-   this._buttonElement = this._form.querySelector(this._dataObj.submitButtonSelector); // кнопка отправки сообщения
+export default class FormValidator {
+  constructor(dataSelectorsValid, formElement) {
+    const {
+      inputsSelector,
+      submitButtonSelector,
+      inactiveButtonClass,
+      inputErrorClass,
+      errorClass,
+    } = dataSelectorsValid;
+    this._form = formElement; // форма, которую валидируем
+    this._inputList = Array.from(this._form.querySelectorAll(inputsSelector)); // поля ввода формы которые будут валидироваться
+    this._buttonElement = this._form.querySelector(submitButtonSelector); // кнопка отправки сообщения
+    this._btnInactive = inactiveButtonClass; // добавочный класс кнопки меняет цвет кнопки в зависимости от активная/неактивная
+    this._inputEror = inputErrorClass; // добавление класса подсветки бордера инпута при ошибке ввода
+    this._showError = errorClass; // селектор ошибки - показать ошибку.
   }
 
-  _showInputError(inputElement, errorMessage){
+  _showInputError(inputElement, errorMessage) {
     const errorElement = this._form.querySelector(`#${inputElement.id}-error`);
     inputElement.classList.add(this._inputEror);
     errorElement.textContent = errorMessage;
@@ -38,48 +45,46 @@ export default class FormValidator{
     errorElement.textContent = '';
   }
 
-  _hasInvalidInput(){
-      return this._inputList.some(inputElement => !inputElement.validity.valid);
+  _hasInvalidInput() {
+    return this._inputList.some((inputElement) => !inputElement.validity.valid);
   }
 
-  _toggleButtonState(){
+  _toggleButtonState() {
     if (this._hasInvalidInput()) {
-        this._buttonElement.classList.add(this._btnInactive);
-        this._buttonElement.setAttribute('disabled','');
-      } else {
-          this._buttonElement.classList.remove(this._btnInactive);
-          this._buttonElement.removeAttribute('disabled','');
+      this._buttonElement.classList.add(this._btnInactive);
+      this._buttonElement.setAttribute('disabled', '');
+    } else {
+      this._buttonElement.classList.remove(this._btnInactive);
+      this._buttonElement.removeAttribute('disabled', '');
     }
   }
 
-  _isValid(inputElement){
+  _isValid(inputElement) {
     if (!inputElement.validity.valid) {
-        this._showInputError(inputElement, inputElement.validationMessage);
-      } else {
-          this._hideInputError(inputElement);
+      this._showInputError(inputElement, inputElement.validationMessage);
+    } else {
+      this._hideInputError(inputElement);
     }
   }
 
   _setEventListeners() {
     this._toggleButtonState();
-    this._inputList.forEach(inputElement => {
-        inputElement.addEventListener('input', () => {
-          isValid(inputElement);
-          this._toggleButtonState();
-        });
-    });
-  }
-
-  cleanValidError() {
-    this._inputList.forEach(inputElement => {
+    this._inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', () => {
-        this._hideInputError(inputElement);
+        this._isValid(inputElement);
         this._toggleButtonState();
       });
     });
   }
 
-  enableValidation(){
-      this._setEventListeners();
-    }
+  cleanValidError() {
+    this._inputList.forEach((inputElement) => {
+      this._hideInputError(inputElement);
+      this._toggleButtonState();
+    });
+  }
+
+  enableValidation() {
+    this._setEventListeners();
+  }
 }

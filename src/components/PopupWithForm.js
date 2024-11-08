@@ -15,44 +15,44 @@
 import Popup from './Popup.js';
 
 export default class PopupWithForm extends Popup {
-  constructor(selectorPopup, callbacksubmit){
+  constructor(selectorPopup, popupValidate, { callbackSubmit }) {
     super(selectorPopup);
-    this._callbacksubmit = callbacksubmit;
-    this._form = this._popup.querySelector('.popup__form');
+    this._popupValidate = popupValidate;
+    this._callbackSubmit = callbackSubmit;
+    this._form = this._modalWindow.querySelector('.popup__form');
     this._inputList = Array.from(this._form.querySelectorAll('.popup__input'));
-    this._submitBtn = this._popup.querySelector('.popup__button');
+    this._submitBtn = this._modalWindow.querySelector('.popup__button');
   }
-  _getInputValues(){
+  _getInputValues() {
     const inputValues = {};
-    this._inputList.forEach(inputElement => {
+    this._inputList.forEach((inputElement) => {
       inputValues[inputElement.name] = inputElement.value;
     });
-     return inputValues;
+    return inputValues;
   }
 
-  _renderSaveBtn(isLoading, text=""){
-     if(isLoading){
-        this._submitBtn.textContent = "Сохранение...";
-     } else {
-        this._submitBtn.textContent = `${text}`;
-     }
+  renderSaveBtn(isLoading, text = 'Сохранить') {
+    if (isLoading) {
+      this._submitBtn.textContent = 'Сохранение...';
+    } else {
+      this._submitBtn.textContent = `${text}`;
+    }
   }
 
-   setEventListeners(){
+  setEventListeners() {
     super.setEventListeners();
+    this._popupValidate.enableValidation();
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
-    this._renderSaveBtn(true);
-    this._callbacksubmit(this._getInputValues())
-     .then(() => this.close())
-     .catch(err => console.log(err))
-     .finally(() => this._renderSaveBtn(false, 'Сохранить'));
+      this.renderSaveBtn(true);
+      const values = this._getInputValues();
+      this._callbackSubmit(values, this.renderSaveBtn.bind(this));
     });
   }
 
-   close(){
-    super.close();
+  closePopup() {
+    super.closePopup();
     this._form.reset();
-   }
+    this._popupValidate.cleanValidError();
+  }
 }
-
